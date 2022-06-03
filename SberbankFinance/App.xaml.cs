@@ -18,7 +18,7 @@ namespace SberbankFinance
         protected override void OnStartup(StartupEventArgs e)
         {
             NavigationStore navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new LoginViewModel();
+            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
 
             MainWindow = new MainWindow()
             {
