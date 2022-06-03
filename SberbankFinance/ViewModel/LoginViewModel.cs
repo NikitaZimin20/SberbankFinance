@@ -1,4 +1,4 @@
-﻿using SberbankFinance.Commands;
+using SberbankFinance.Commands;
 using SberbankFinance.Services;
 using SberbankFinance.Stores;
 using System;

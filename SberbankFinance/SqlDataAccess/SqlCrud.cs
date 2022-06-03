@@ -15,17 +15,18 @@ namespace SberbankFinance.SqlDataAccess
         {
             _connectionString = connectionString;
         }
-        public List<SqlDataModel> CheckExistance()
+        public List<SqlDataModel> CheckExistance(string username)
         {
-            string sql = "SELECT";
+            string sql = "SELECT username  FROM UserInformation WHERE @username" ;
 
-            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new {  }, _connectionString);
+            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { username }, _connectionString);
         }
+
 
         public void AddNewUser(string username)
         {
            
-            string sql = "INSERT INTO ";
+            string sql = "INSERT INTO Usename Values(@username) ";
             _dataAccess.SaveData(sql, new { username,  }, _connectionString);
         }
 

@@ -57,6 +57,7 @@
             </Button>
         </StackPanel>
         <StackPanel 
+            
             Orientation="Horizontal"
             Background="#212121">
             <Button 
@@ -80,7 +81,7 @@
         </StackPanel>
 
         <ContentControl Content="{Binding SelectedViewModel}"
-                            Height="340">
+                            Height="318">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewmodels:IncomeViewModel}">
                     <views:IncomeView/>
@@ -91,10 +92,81 @@
 
             </ContentControl.Resources>
         </ContentControl>
+        <Button 
+            Height="50"
+            Margin="10"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Command="{Binding Path=NavigateToOutcomeCommand}">
+            <StackPanel 
+                Orientation="Horizontal"
+                >
+                <materialdesign:PackIcon  
+
+                Kind="PlusBox"
+                Foreground="Lime"
+                Margin="-190 0 0 0"
+                Height="30"
+                Width="30"/>
+                <TextBlock 
+                    Margin="-150 0"
+                    FontSize="23"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Text="Внести расход "/>
+            </StackPanel>
+
+        </Button>
+
+        <Button 
+            Margin="10"
+            Height="50"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Command="{Binding Path=NavigateToIncomeCommand}">
+            <StackPanel 
+                Orientation="Horizontal"
+                >
+                <materialdesign:PackIcon  
+                Kind="PlusBox"
+                Foreground="Lime"
+                Margin="-190 0 0 0"
+                Height="30"
+                Width="30"/>
+                <TextBlock 
+                    FontSize="23"
+                    Margin="-150 0"
+                    Foreground="White"
+                    Text="Внести доход "/>
+            </StackPanel>
+
+        </Button>
+        <Button 
+            Margin="10"
+            Height="50"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Command="{Binding Path=NavigateToIncomeCommand}">
+            <StackPanel 
+                Orientation="Horizontal"
+                >
+                <materialdesign:PackIcon  
+                Kind="PlusBox"
+                Foreground="Lime"
+                Margin="-190 0 0 0"
+                Height="30"
+                Width="30"/>
+                <TextBlock 
+                    FontSize="23"
+                    Margin="-150 0"
+                    Foreground="White"
+                    Text="Добавить категории "/>
+            </StackPanel>
+
+        </Button>
 
 
 
 
-       
     </StackPanel>
 </UserControl>
