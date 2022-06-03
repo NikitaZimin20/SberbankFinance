@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="SberbankFinance.View.BalanceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SberbankFinance.View" xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:BalanceViewModel}"
+             mc:Ignorable="d" 
+             Height="400" 
+             Width="400">
+    <Grid Background="#151719">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="24*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <StackPanel
+            Background="#212121"
+            Orientation="Horizontal"
+            Grid.ColumnSpan="3"
+            >
+            <Button
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding Path=NavigateToHomeView}"
+                >
+                <materialdesign:PackIcon 
+                    Kind="ArrowBack"
+                    Foreground="Lime"
+                    
+                    Height="30"
+                    Width="30"
+                    HorizontalAlignment="Center"
+                    />
+            </Button>
+            <TextBlock
+                Text="Контроль"
+                Foreground="White"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Margin="70 0"/>
+            <TextBlock
+                Margin="-60 0 0 0"
+                Foreground="White"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Text="{Binding Path=Label}"/>
+        </StackPanel>
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="1"
+            Foreground="White"
+            materialdesign:HintAssist.Hint="Сумма"
+            Text="{Binding Path=BalanceModel.Amount}" Margin="0,33,0,32"/>
+        <ComboBox
+            Grid.Column="1"
+            Grid.Row="2"
+            Foreground="White"
+            Height="30"
+            materialdesign:HintAssist.Hint="Категория"
+            Text="{Binding Path=BalanceModel.Description}"/>
+        <DatePicker
+           Grid.Column="1"
+            Grid.Row="3"
+            Foreground="White"
+            Height="30"
+            materialdesign:HintAssist.Hint="Дата"
+            CalendarStyle="{StaticResource MaterialDesignCalendarPortrait}"
+            Text="{Binding Path=BalanceModel.Calendar}">
+
+        </DatePicker>
+        <Button
+            Grid.Column="1"
+            Grid.Row="4"
+            Command="{Binding Path=NoteCommand}"
+            Content="Подтвердить" 
+            
+            Height="70"
+            />
+    </Grid>
+</UserControl>

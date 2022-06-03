@@ -18,6 +18,10 @@
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BalanceViewModel}">
+                <views:BalanceView/>
+            </DataTemplate>
+           
         </ContentControl.Resources>
        
         
