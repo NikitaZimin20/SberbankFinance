@@ -8,7 +8,8 @@ namespace SberbankFinance.Model
 {
     internal class SqlDataModel
     {
-        public int MyProperty { get; set; }
+        public string Wastes { get; set; }
+      
 
     }
 }
