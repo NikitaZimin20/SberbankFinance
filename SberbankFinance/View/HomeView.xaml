@@ -21,30 +21,20 @@
             Orientation="Horizontal"
             Height="50"
             Background="#212121">
-            <Button
-                Background="Transparent"
-                BorderThickness="0"
-                >
-                <materialdesign:PackIcon 
-                    Kind="ArrowBack"
-                    Foreground="Lime"
-                    Height="30"
-                    Width="30"
-                    HorizontalAlignment="Center"
-                    />
-            </Button>
+           
             <TextBlock
                 Background="Transparent"
                 Text="Анализ Финансов"
                 HorizontalAlignment="Center"
                 Foreground="White"
-                Margin="70 10"
+                Margin="100 10"
                 FontSize="18"
                 
                 />
             <Button
                 Background="Transparent"
                 BorderThickness="0"
+                Command="{Binding Path=NavigateToSettingsCommand}"
                 >
                 <materialdesign:PackIcon 
                     Kind="Settings"

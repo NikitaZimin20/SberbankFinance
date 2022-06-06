@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="SberbankFinance.View.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SberbankFinance.View" xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400"
+               >
+    <StackPanel Background="#151719">
+        <StackPanel 
+            VerticalAlignment="Top"
+            Orientation="Horizontal"
+            Height="50"
+            Background="#212121">
+            <Button
+                Background="Transparent"
+                BorderThickness="0"
+                >
+                <materialdesign:PackIcon 
+                    Kind="ArrowBack"
+                    Foreground="Lime"
+                    Height="30"
+                    Width="30"
+                    HorizontalAlignment="Center"
+                    />
+            </Button>
+            <TextBlock
+                Background="Transparent"
+                Text="Настройки аккаунта"
+                HorizontalAlignment="Center"
+                Foreground="White"
+                Margin="70 10"
+                FontSize="18"
+                
+                />
+
+        </StackPanel>
+        <StackPanel >
+           
+            <materialdesign:PackIcon
+                Kind="Account"
+                Height="140"
+                Width="100"
+                HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel 
+            Orientation="Vertical"
+            VerticalAlignment="Top"
+            
+            >
+            
+            <Button 
+                Background="Transparent"
+                BorderThickness="0"
+                Content="Изменить логин или пароль аккаунта"
+                Foreground="White"
+                Margin="0 0 0 10"
+                FontSize="16"/>
+            <Button
+                 Background="Transparent"
+                BorderThickness="0"
+                Content="Поставить цель"
+                Foreground="White"
+                 Margin="0 0 0 10"
+                 FontSize="16"/>
+            <Button
+                 Background="Transparent"
+                BorderThickness="0"
+                Content="Добавить новую категорию"
+                Foreground="White"
+                 Margin="0 0 0 10"
+                 FontSize="16"
+                />
+            <Button
+                 Background="Transparent"
+                BorderThickness="0"
+                Content="Изменить цвета отображаемых категорий"
+                Foreground="White"
+                 Margin="0 0 0 10"
+                 FontSize="16"
+                />
+            <Button
+                 Background="Transparent"
+                BorderThickness="0"
+                Content="Изменить тип отображаемого графика"
+                Foreground="White"
+                 Margin="0 0 0 10"
+                 FontSize="16"
+                />
+            <Button
+                 Background="Transparent"
+                BorderThickness="0"
+                Content="Удалить аккаунт"
+                Foreground="White"
+                 FontSize="16"
+                />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

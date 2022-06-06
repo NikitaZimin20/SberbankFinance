@@ -1,4 +1,5 @@
 ﻿using SberbankFinance.Commands;
+using SberbankFinance.Model;
 using SberbankFinance.SqlDataAccess;
 using SberbankFinance.States;
 using SberbankFinance.Stores;
@@ -13,9 +14,10 @@ namespace SberbankFinance.ViewModel
 {
     internal class HomeViewModel:BaseViewModel
     {
-
+        public UserModel user { get; }
         public ICommand NavigateToIncomeCommand { get; }
         public ICommand NavigateToOutcomeCommand { get; }
+        public ICommand NavigateToSettingsCommand { get; }
         private BaseViewModel _selectedViewModel;
         public BaseViewModel SelectedViewModel
         {
@@ -31,7 +33,8 @@ namespace SberbankFinance.ViewModel
 
         public HomeViewModel(NavigationStore navigationStore)
         {
-            NavigateToOutcomeCommand= new NavigateCommand<BalanceViewModel>(navigationStore, () => new BalanceViewModel(navigationStore,BalanceState.Outcome));
+            NavigateToSettingsCommand= new NavigateCommand<SettingsViewModel>(navigationStore, () => new SettingsViewModel(navigationStore));
+            NavigateToOutcomeCommand = new NavigateCommand<BalanceViewModel>(navigationStore, () => new BalanceViewModel(navigationStore,BalanceState.Outcome));
             NavigateToIncomeCommand = new NavigateCommand<BalanceViewModel>(navigationStore, () => new BalanceViewModel(navigationStore,BalanceState.Income));
             SelectedViewModel = new OutcomeViewModel();
             UpdateViewCommand = new ShowViewCommand(this);
