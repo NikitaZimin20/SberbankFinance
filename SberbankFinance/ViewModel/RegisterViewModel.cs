@@ -20,37 +20,42 @@ namespace SberbankFinance.ViewModel
         public ICommand GoLoginCommand { get; }
         public ICommand NavigateLoginCommand { get; }
 
-        public ICommand RegisterComman { get; }
-        public void OnExecuteRegisterComman(object p)
+        public ICommand RegisterCommand { get; }
+        public void OnExecuteRegisterCommand(object p)
         {
-           
-            if (User.Password==User.AcceptedPassword)
+
+            if (User.Password == User.AcceptedPassword)
             {
                 AcceptRegistration();
             }
             else
             {
-              MessageBox.Show("Пароли не совпадают");
+                MessageBox.Show("Пароли не совпадают");
             }
-            
 
         }
         private void AcceptRegistration()
         {
-
-            if (MessageBox.Show("Вы успешно зарегистрировалис",
-                   "Attention", MessageBoxButton.OK) == MessageBoxResult.OK)
+            SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
+            bool iscorrect = sql.CheckExistance(User.Name, User.Password).Select(x => x.IsCorrect).FirstOrDefault();
+            if (iscorrect)
             {
-                SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
+                MessageBox.Show("Данный пользователь уже существует");
+            }
+            else
+            {                
                 sql.Register(User.Name, User.Password);
+                MessageBox.Show("Вы успешно зарегистрировались",
+               "Attention", MessageBoxButton.OK);
                 GoLoginCommand.Execute(this);
             }
+            
         }
-        public bool CanExecuteRegisterComman(object p) => true;
+        public bool CanExecuteRegisterCommand(object p) => true;
         public RegisterViewModel(NavigationStore navigationStore)
         {
             User = new UserModel();
-            RegisterComman = new RelayCommand(OnExecuteRegisterComman,CanExecuteRegisterComman );
+            RegisterCommand = new RelayCommand(OnExecuteRegisterCommand,CanExecuteRegisterCommand );
             GoLoginCommand = new NavigateCommand<LoginViewModel>(navigationStore,()=>new LoginViewModel(navigationStore));
         }
     }
