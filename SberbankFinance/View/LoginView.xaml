@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SberbankFinance.View"
-             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" xmlns:components="clr-namespace:SberbankFinance.Components" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              mc:Ignorable="d"              
              Height="600" 
              Width="400">
@@ -22,7 +22,7 @@
                 Margin="0 10 0 0"
                 />
             </StackPanel>
-            <StackPanel Height="235">
+            <StackPanel>
                 <TextBox 
             Background="#212121"
             Width="300"
@@ -37,37 +37,34 @@
                 >
                 </TextBox>
 
-                <TextBox 
-            Background="#212121"
+                <components:BindablePasswordBox 
+            
             Width="300"
             FontSize="20"
-            materialdesign:HintAssist.Hint="Пароль"
-            materialdesign:HintAssist.Background="Transparent"
-            Style="{StaticResource MaterialDesignFilledTextBox}"
+            materialdesign:HintAssist.Hint="Пароль"                       
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
-            Text="{Binding Path=User.Password}"
+            Password="{Binding Path=User.Password}"
                 >
-                </TextBox>
+                </components:BindablePasswordBox>
 
-            </StackPanel>
-            <CheckBox Margin="65 15 65 0" 
+                <CheckBox Margin="65 15 65 0" 
                           Content="    Показать пароль"
                           FontSize="20"
                           Foreground="#808080"
                           materialdesign:CheckBoxAssist.CheckBoxSize="25" >
-                    
+
                 </CheckBox>
 
-            <CheckBox Margin="65 30 65 0" 
+                <CheckBox Margin="65 30 65 0" 
                           Content="    Запомнить меня"
                           FontSize="20"
                           Foreground="#808080"
                           materialdesign:CheckBoxAssist.CheckBoxSize="25" >
 
-            </CheckBox>
+                </CheckBox>
 
-            <Button VerticalAlignment="Center"
+                <Button VerticalAlignment="Center"
                         Margin="50 30 50 0"
                         Height="50"
                         Content="Прододжить"
@@ -76,17 +73,18 @@
 
 
 
-            </Button>
+                </Button>
 
-            <Button Margin="50 30 50 0"
+                <Button Margin="50 30 50 0"
                         Content="Зарегистрироваться"
                         FontSize="18"
                         Background="Transparent"
                         Foreground="#808080"
                         Command="{Binding Path=GoRegisterCommand}">
-                        
+
                 </Button>
-                
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>
