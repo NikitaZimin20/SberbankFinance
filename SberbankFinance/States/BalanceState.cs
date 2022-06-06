@@ -9,7 +9,8 @@ namespace SberbankFinance.States
     internal enum BalanceState
     {
         Income,
-        Outcome
+        Outcome,
+        NewCategory
 
     }
 }

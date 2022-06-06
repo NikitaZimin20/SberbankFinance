@@ -30,7 +30,9 @@
             materialdesign:HintAssist.Hint="Логин"
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            Foreground="White" Cursor="IBeam"
+            Foreground="White" 
+                    Cursor="IBeam"
+                    Text="{Binding Path=User.Name}"
             Margin="0 50 0 0"
                 >
                 </TextBox>
@@ -44,11 +46,14 @@
             Style="{StaticResource MaterialDesignFilledTextBox}"
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
+            Text="{Binding Path=User.Password}"
                 >
                 </TextBox>
 
             </StackPanel>
-            <StackPanel Height="60">
+            <StackPanel 
+                Height="80"
+                Margin="0 20">
                 <CheckBox Margin="65 0 65 0" 
                           Content="    Показать пароль"
                           FontSize="20"
@@ -57,7 +62,7 @@
                     
                 </CheckBox>
 
-                <CheckBox Margin="65 0 65 0" 
+                <CheckBox Margin="65 10 65 0" 
                           Content="    Запомнить меня"
                           FontSize="20"
                           Foreground="#808080"
@@ -67,13 +72,16 @@
                 
             </StackPanel>
 
-            <StackPanel Height="75">
+            <StackPanel 
+                Height="75"
+                Margin="0 0">
 
                 <Button VerticalAlignment="Center"
                         Margin="50 10 50 0"
                         Height="50"
                         Content="Прододжить"
-                        FontSize="20">
+                        FontSize="20"
+                        Command="{Binding Path=LoginCommand}">
                     
                     
                     

@@ -81,7 +81,7 @@
         </StackPanel>
 
         <ContentControl Content="{Binding SelectedViewModel}"
-                            Height="318">
+                            Height="378">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewmodels:IncomeViewModel}">
                     <views:IncomeView/>
@@ -141,29 +141,7 @@
             </StackPanel>
 
         </Button>
-        <Button 
-            Margin="10"
-            Height="50"
-            Background="Transparent"
-            BorderBrush="Transparent"
-            Command="{Binding Path=NavigateToIncomeCommand}">
-            <StackPanel 
-                Orientation="Horizontal"
-                >
-                <materialdesign:PackIcon  
-                Kind="PlusBox"
-                Foreground="Lime"
-                Margin="-190 0 0 0"
-                Height="30"
-                Width="30"/>
-                <TextBlock 
-                    FontSize="23"
-                    Margin="-150 0"
-                    Foreground="White"
-                    Text="Добавить категории "/>
-            </StackPanel>
-
-        </Button>
+        
 
 
 

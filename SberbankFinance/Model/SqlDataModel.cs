@@ -9,8 +9,10 @@ namespace SberbankFinance.Model
     internal class SqlDataModel
     {
         public string Wastes { get; set; }
-        public int Username { get; set; }
+        public string Username { get; set; }
+        public bool IsCorrect { get; set; }
 
-
+        public int Id { get; set; }
+        public string Categories { get; set; }
     }
 }

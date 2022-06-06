@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SberbankFinance.States;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace SberbankFinance.Model
             get => _description;
             set
             {
+                
                 _description = value;
                 OnPropertyChanged(nameof(Description));
             }
@@ -37,7 +39,7 @@ namespace SberbankFinance.Model
             set
             {
                 _calendar = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Calendar));
             }
         }
 

@@ -1,54 +1,46 @@
 using SberbankFinance.Commands;
+using SberbankFinance.Model;
 using SberbankFinance.Services;
+using SberbankFinance.SqlDataAccess;
 using SberbankFinance.Stores;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
     class LoginViewModel:BaseViewModel
     {
-     public ICommand GoRegisterCommand { get; }
+        public UserModel User { get;private set; }
+        public ICommand NavigateHome { get; private set; }
+        public ICommand GoRegisterCommand { get; }
 
-        string _login;
-        string _password;
-
-        //public string Login
-        //{
-        //    get
-        //    {
-        //        _login = (_login ?? _user?.Login) ?? string.Empty;
-        //        return _login;
-        //    }
-        //    set
-        //    {
-        //        _login = value;
-        //        ErrorManager.ShowErrors(_login, nameof(Login), Fields.Login);
-        //        OnPropertyChanged(nameof(Login));
-        //    }
-        //}
-        //public string Password
-        //{
-        //    get
-        //    {
-        //        _password = (_password ?? _user?.Surname) ?? string.Empty;
-        //        return _password;
-        //    }
-        //    set
-        //    {
-        //        _password = value;
-        //        ShowErrors(_password, nameof(Password), Fields.Password);
-        //        OnPropertyChanged(nameof(Password));
-        //    }
-        //}
+        public ICommand LoginCommand { get; }
+        private void OnExecuteLoginCommand(object p)
+        {
+            SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
+            bool iscorrect = sql.CheckExistance(User.Name, User.Password).Select(x => x.IsCorrect).FirstOrDefault();
+            if (iscorrect)
+             {
+                User.Id = sql.ShowId(User.Name).Select(x=>x.Id).FirstOrDefault();
+                NavigateHome.Execute(this);
+            }
+            else MessageBox.Show("Некорекный логин или пароль");
+        }
+        private bool CanExecuteLoginCommand(object p) => true;
 
         public LoginViewModel(NavigationStore navigationStore)
         {
+            User = new UserModel();
+            NavigateHome= new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
+            LoginCommand =new RelayCommand(OnExecuteLoginCommand, CanExecuteLoginCommand);
             GoRegisterCommand = new NavigateCommand<RegisterViewModel>(navigationStore, () => new RegisterViewModel(navigationStore));
         }
+       
     }
 }

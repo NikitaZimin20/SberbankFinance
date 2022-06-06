@@ -64,7 +64,10 @@
             Foreground="White"
             Height="30"
             materialdesign:HintAssist.Hint="Категория"
-            Text="{Binding Path=BalanceModel.Description}"/>
+            Text="{Binding Path=BalanceModel.Description}"
+            ItemsSource="{Binding Categories}">
+            
+        </ComboBox>
         <DatePicker
            Grid.Column="1"
             Grid.Row="3"
