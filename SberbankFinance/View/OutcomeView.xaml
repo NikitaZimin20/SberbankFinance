@@ -29,21 +29,27 @@
             </StackPanel>
             
             <livecharts:PieChart LegendLocation="Bottom"
-                                 Height="200"
+                                 Height="235"
                                  Width="500"
+
+                                 Margin="-50 0 0 0"
                                  
                                  >
                 <livecharts:PieChart.ChartLegend>
-                    <livecharts:DefaultLegend BulletSize="15" 
-                                              TextBlock.FontSize="10"
-                                              Content="{Binding Path=TypeOfWastes}"/>
+                    <livecharts:DefaultLegend
+                        >
+                        <TextBlock Text="Алкаголь"/>
+                        
+                    </livecharts:DefaultLegend>
                 </livecharts:PieChart.ChartLegend>
                 <livecharts:PieChart.DataTooltip>
                     <livecharts:DefaultTooltip BulletSize="20"/>
                 </livecharts:PieChart.DataTooltip>
                 <livecharts:PieChart.Series>
                     <livecharts:PieSeries 
+                        
                         Values="{Binding Path=Cases}"
+                        
                         Height="20"
                         Width="50"/>
                 </livecharts:PieChart.Series>
