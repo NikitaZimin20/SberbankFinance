@@ -16,7 +16,7 @@ namespace SberbankFinance.ViewModel
 {
     class LoginViewModel:BaseViewModel
     {
-        private bool _ischecked;
+        private bool _ischecked = false;
         public bool IsChecked
         {
             get => _ischecked;

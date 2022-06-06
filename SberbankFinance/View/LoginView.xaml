@@ -40,18 +40,33 @@
                 >
                     
                 </TextBox>
-
-                <components:BindablePasswordBox 
+                <Grid>
+                    <components:BindablePasswordBox 
             
             Width="300"
             FontSize="20"
             materialdesign:HintAssist.Hint="Пароль"                       
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
-            Password="{Binding Path=User.Password}"
-            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" 
+            Password="{Binding Path=User.Password}"           
                 >
                 </components:BindablePasswordBox>
+                    <TextBox 
+            Background="#212121"
+            Width="300"
+            FontSize="20"
+            materialdesign:HintAssist.Hint="Пароль"
+            materialdesign:HintAssist.Background="Transparent"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            Foreground="White" 
+            Cursor="IBeam"
+            Text="{Binding Path=User.Password}" 
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="0 50 0 0"
+                >
+
+                    </TextBox>
+                </Grid>
 
                 <CheckBox 
                          Name="CommentCheckBox"
