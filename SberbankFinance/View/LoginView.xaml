@@ -49,7 +49,7 @@
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
             Password="{Binding Path=User.Password}"
-          Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" 
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" 
                 >
                 </components:BindablePasswordBox>
 

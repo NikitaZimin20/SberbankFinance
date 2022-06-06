@@ -49,7 +49,7 @@
                     <livecharts:PieSeries 
                         Title="Алкаголь"
                         Values="3"
-                        
+                        Stroke="Black"
                         Height="20"
                         Width="50"/>
                     <livecharts:PieSeries 
