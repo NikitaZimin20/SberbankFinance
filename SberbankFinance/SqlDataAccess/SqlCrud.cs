@@ -45,9 +45,10 @@ namespace SberbankFinance.SqlDataAccess
             string sql = "Select CategoryName AS Categories FROM IncomeCategories";
             return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { }, _connectionString);
         }
-        public void AddOutcome(string amount,string category,string userId,string categoryId)
+        
+        public void AddOutcome(BalanceModel balance,UserModel user)
         {
-            string sql = "INSERT INTO Outcome(Amount,Category_id,User_id) Values(@amount,@category,@userId,@categoryId)";
+            string sql = "INSERT INTO Outcome(Amount,Date,Category_id,User_id) Values(@amount,@date,@category,@userId)";
         }
 
     }

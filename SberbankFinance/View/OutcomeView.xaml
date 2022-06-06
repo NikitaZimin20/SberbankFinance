@@ -37,8 +37,8 @@
                                  >
                 <livecharts:PieChart.ChartLegend>
                     <livecharts:DefaultLegend
-                        >
-                        <TextBlock Text="Алкаголь"/>
+                      Foreground="White"  >
+                        
                         
                     </livecharts:DefaultLegend>
                 </livecharts:PieChart.ChartLegend>
@@ -47,9 +47,21 @@
                 </livecharts:PieChart.DataTooltip>
                 <livecharts:PieChart.Series>
                     <livecharts:PieSeries 
+                        Title="Алкаголь"
+                        Values="3"
                         
-                        Values="{Binding Path=Cases}"
+                        Height="20"
+                        Width="50"/>
+                    <livecharts:PieSeries 
+                        Title="Сигареты"
+                        Values="2"
                         
+                        Height="20"
+                        Width="50"/>
+                    <livecharts:PieSeries 
+                        Title="Еда"
+                        Values="3"
+                        Foreground="White"
                         Height="20"
                         Width="50"/>
                 </livecharts:PieChart.Series>

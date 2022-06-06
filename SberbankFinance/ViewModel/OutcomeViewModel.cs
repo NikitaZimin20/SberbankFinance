@@ -12,14 +12,34 @@ namespace SberbankFinance.ViewModel
 {
     internal class OutcomeViewModel:BaseViewModel
     {
-        public ChartValues<int> Cases { get; set;}
+       
+       public LiveCharts.Wpf.PieChart Series { get; set; }
         public string[] TypeOfWastes { get; set;}
+        private void InitializeChart()
+        {
+           SeriesCollection psc = new SeriesCollection
+         {
+        new LiveCharts.Wpf.PieSeries
+        {
+            
+        Values = new LiveCharts.ChartValues<decimal> {1,1},
+        },
+        new LiveCharts.Wpf.PieSeries
+        {
+        Values = new LiveCharts.ChartValues<decimal> {3,7},
+        }
+            };
+            foreach (LiveCharts.Wpf.PieSeries ps in psc)
+            {
+                Series.Series.Add(ps);
+            }
+
+        }
         public OutcomeViewModel()
         {
-            Cases = new ChartValues<int>
-            {
-                5,12,223,232,232,231,442
-            };
+            Series = new LiveCharts.Wpf.PieChart();
+            InitializeChart();
+            
             TypeOfWastes = new string[] {"Хуй","Залупа" };
         }
       

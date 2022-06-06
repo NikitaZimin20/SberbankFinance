@@ -15,6 +15,7 @@ namespace SberbankFinance.ViewModel
 {
     internal class BalanceViewModel:BaseViewModel
     {
+        private readonly UserModel _usermodel;
         public BalanceModel BalanceModel { get; }
         SqlCrud _sql;
         public ICommand NavigateToHomeView { get; }
@@ -48,7 +49,7 @@ namespace SberbankFinance.ViewModel
         }
         private void OnExecuteNoteCommand(object p)
         {
-            
+            _sql.AddOutcome(BalanceModel,_usermodel);
             NavigateToHomeView.Execute(this);
         }
         private bool CanExecuteNoteCommand(object obj) => true;

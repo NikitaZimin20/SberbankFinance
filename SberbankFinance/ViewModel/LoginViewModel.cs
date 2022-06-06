@@ -16,6 +16,12 @@ namespace SberbankFinance.ViewModel
 {
     class LoginViewModel:BaseViewModel
     {
+        private bool _ischecked;
+        public bool IsChecked
+        {
+            get => _ischecked;
+            set => _ischecked = value;
+        }
         public UserModel User { get;private set; }
         public ICommand NavigateHome { get; private set; }
         public ICommand GoRegisterCommand { get; }
