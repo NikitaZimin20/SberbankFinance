@@ -8,7 +8,8 @@ namespace SberbankFinance.Services
 {
     internal enum Fields
     {
-        Login,
-        Password
+        Name,
+        Password,
+        AcceptedPassword
     }
 }

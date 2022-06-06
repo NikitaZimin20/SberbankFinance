@@ -35,7 +35,7 @@
             Style="{StaticResource MaterialDesignFilledTextBox}"
             Foreground="White" 
                     Cursor="IBeam"
-                    Text="{Binding Path=User.Name}"
+                    Text="{Binding Path=Name, Mode=TwoWay, ValidatesOnDataErrors=True}"
             Margin="0 50 0 0"
                 >
                     
@@ -48,7 +48,7 @@
             materialdesign:HintAssist.Hint="Пароль"                       
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
-            Password="{Binding Path=User.Password}"           
+            Password="{Binding Path=Password}"           
                 >
                 </components:BindablePasswordBox>
                     <TextBox 
@@ -60,7 +60,7 @@
             Style="{StaticResource MaterialDesignFilledTextBox}"
             Foreground="White" 
             Cursor="IBeam"
-            Text="{Binding Path=User.Password}" 
+            Text="{Binding Path=Password}" 
             Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
             Margin="0 50 0 0"
                 >
