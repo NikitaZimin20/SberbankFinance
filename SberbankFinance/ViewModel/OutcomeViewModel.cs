@@ -12,10 +12,8 @@ namespace SberbankFinance.ViewModel
 {
     internal class OutcomeViewModel:BaseViewModel
     {
-        public ChartValues<int> Cases { get; set; }
-        public string[] TypeOfWastes { get; set; }
-
-
+        public ChartValues<int> Cases { get; set;}
+        public string[] TypeOfWastes { get; set;}
         public OutcomeViewModel()
         {
             Cases = new ChartValues<int>
