@@ -51,10 +51,7 @@
                 </TextBox>
 
             </StackPanel>
-            <StackPanel 
-                Height="80"
-                Margin="0 20">
-                <CheckBox Margin="65 0 65 0" 
+            <CheckBox Margin="65 15 65 0" 
                           Content="    Показать пароль"
                           FontSize="20"
                           Foreground="#808080"
@@ -62,35 +59,26 @@
                     
                 </CheckBox>
 
-                <CheckBox Margin="65 10 65 0" 
+            <CheckBox Margin="65 30 65 0" 
                           Content="    Запомнить меня"
                           FontSize="20"
                           Foreground="#808080"
                           materialdesign:CheckBoxAssist.CheckBoxSize="25" >
 
-                </CheckBox>
-                
-            </StackPanel>
+            </CheckBox>
 
-            <StackPanel 
-                Height="75"
-                Margin="0 0">
-
-                <Button VerticalAlignment="Center"
-                        Margin="50 10 50 0"
+            <Button VerticalAlignment="Center"
+                        Margin="50 30 50 0"
                         Height="50"
                         Content="Прододжить"
                         FontSize="20"
                         Command="{Binding Path=LoginCommand}">
-                    
-                    
-                    
-                </Button>
-                
-            </StackPanel>
-            <StackPanel Height="180">
 
-                <Button Margin="50 10 50 0"
+
+
+            </Button>
+
+            <Button Margin="50 30 50 0"
                         Content="Зарегистрироваться"
                         FontSize="18"
                         Background="Transparent"
@@ -99,7 +87,6 @@
                         
                 </Button>
                 
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
