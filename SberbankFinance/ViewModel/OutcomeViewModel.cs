@@ -1,5 +1,6 @@
 ﻿using LiveCharts;
 using SberbankFinance.Commands;
+using SberbankFinance.Model;
 using SberbankFinance.Stores;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace SberbankFinance.ViewModel
 {
     internal class OutcomeViewModel:BaseViewModel
     {
-       
+
         public string[] TypeOfWastes { get; set;}
        
         public OutcomeViewModel()

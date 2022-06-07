@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
-    class LoginViewModel:BaseViewModel
+    class LoginViewModel: BaseViewModel,INotifyDataErrorInfo
     {
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
@@ -47,7 +47,7 @@ namespace SberbankFinance.ViewModel
         private void OnExecuteLoginCommand(object p)
         {
             SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            bool iscorrect = sql.CheckExistance(User.Name, User.Password).Select(x => x.IsCorrect).FirstOrDefault();
+            bool iscorrect = sql.CheckExistance(Name, Password).Select(x => x.IsCorrect).FirstOrDefault();
             if (iscorrect)
              {
                 User.Id = sql.ShowId(User.Name).Select(x=>x.Id).FirstOrDefault();

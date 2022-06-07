@@ -20,11 +20,21 @@
             Background="#212121">
                 <TextBlock 
                 HorizontalAlignment="Left"
+                Text="{Binding}"
+                Foreground="White"
                
                 />
-                <TextBlock
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
                 HorizontalAlignment="Left"
+                Text="Расходы в "
+                Foreground="White"
                 />
+                    <TextBlock 
+                        Text="{Binding}"
+                        Foreground="White"/>
+                </StackPanel>
+               
 
             </StackPanel>
             
