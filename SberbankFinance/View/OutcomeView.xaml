@@ -55,7 +55,7 @@
                 <livecharts:PieChart.DataTooltip>
                     <livecharts:DefaultTooltip BulletSize="20"/>
                 </livecharts:PieChart.DataTooltip>
-                <livecharts:PieChart.Series>
+                <livecharts:PieChart.Series >
                     <livecharts:PieSeries 
                         Title="Алкаголь"
                         Values="3"
@@ -65,7 +65,6 @@
                     <livecharts:PieSeries 
                         Title="Сигареты"
                         Values="2"
-                        
                         Height="20"
                         Width="50"/>
                     <livecharts:PieSeries 
