@@ -46,7 +46,7 @@ namespace SberbankFinance.ViewModel
         public ICommand LoginCommand { get; }
         private void OnExecuteLoginCommand(object p)
         {
-            SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
+            SqlCrud sql = new SqlCrud(Configuration.Get());
             bool iscorrect = sql.CheckExistance(Name, Password).Select(x => x.IsCorrect).FirstOrDefault();
             if (iscorrect)
              {
