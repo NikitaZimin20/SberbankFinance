@@ -11,8 +11,8 @@ namespace SberbankFinance.Model
     internal class BalanceModel:INotifyPropertyChanged
     {
         private string _amount;
-        private string _description;
-        private DateTime _calendar=DateTime.Now;
+        private string _type;
+        private DateTime _data=DateTime.Now;
 
         public string Amount
         {
@@ -23,23 +23,23 @@ namespace SberbankFinance.Model
                 OnPropertyChanged(nameof(Amount));
             }
         }
-        public string Description
+        public string Type
         {
-            get => _description;
+            get => _type;
             set
             {
                 
-                _description = value;
-                OnPropertyChanged(nameof(Description));
+                _type = value;
+                OnPropertyChanged(nameof(Type));
             }
         }
-        public DateTime Calendar
+        public DateTime Date
         {
-            get => _calendar;
+            get => _data;
             set
             {
-                _calendar = value;
-                OnPropertyChanged(nameof(Calendar));
+                _data = value;
+                OnPropertyChanged(nameof(Date));
             }
         }
 

@@ -64,7 +64,7 @@
             Foreground="White"
             Height="30"
             materialdesign:HintAssist.Hint="Категория"
-            Text="{Binding Path=BalanceModel.Description}"
+            Text="{Binding Path=BalanceModel.Type}"
             ItemsSource="{Binding Categories}">
             
         </ComboBox>
@@ -75,7 +75,9 @@
             Height="30"
             materialdesign:HintAssist.Hint="Дата"
             CalendarStyle="{StaticResource MaterialDesignCalendarPortrait}"
-            Text="{Binding Path=BalanceModel.Calendar}">
+            
+            DisplayDate="{Binding Path=BalanceModel.Date}"
+            >
 
         </DatePicker>
         <Button

@@ -14,5 +14,6 @@ namespace SberbankFinance.Model
 
         public int Id { get; set; }
         public string Categories { get; set; }
+        public string Amount { get; set; }
     }
 }

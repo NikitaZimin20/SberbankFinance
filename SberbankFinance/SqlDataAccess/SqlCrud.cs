@@ -46,9 +46,24 @@ namespace SberbankFinance.SqlDataAccess
             return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { }, _connectionString);
         }
         
-        public void AddOutcome(BalanceModel balance,UserModel user)
+        public void AddOutcome(BalanceModel balance,int id)
         {
-            string sql = "INSERT INTO Outcome(Amount,Date,Category_id,User_id) Values(@amount,@date,@category,@userId)";
+            string sql = "INSERT INTO Outcome(Amount,Date,Category_id,User_id) Values(@amount,@date,(Select Id from OutcomeCategories WHERE CategoryName=@type),@id)";
+            
+            _dataAccess.SaveData(sql, new { balance.Amount, balance.Date,balance.Type,id }, _connectionString);
+        }
+        public List<SqlDataModel> GetOutcomeByMonth(int id,DateTime selectedDate )
+        {
+            DateTime startDate = new DateTime(selectedDate.Year,selectedDate.Month,1);
+            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            string sql = "SELECT sum(Outcome.Amount) AS Amount,OutcomeCategories.CategoryName AS Categories " +
+                "From Outcome  " +
+                "JOIN  OutcomeCategories On OutcomeCategories.Id=Outcome.Category_Id " +
+                "WHERE Outcome.User_id=@id and Date BETWEEN @startDate AND @endDate " +
+                "GROUP BY OutcomeCategories.CategoryName";
+;
+
+            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new {id,startDate,endDate }, _connectionString);
         }
 
     }

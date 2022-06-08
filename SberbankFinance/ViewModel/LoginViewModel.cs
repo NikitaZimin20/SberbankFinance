@@ -34,11 +34,12 @@ namespace SberbankFinance.ViewModel
         public ICommand LoginCommand { get; }
         private void OnExecuteLoginCommand(object p)
         {
+            DataContainer data = new DataContainer();
             SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
             bool iscorrect = sql.CheckExistance(User.Name, User.Password).Select(x => x.IsCorrect).FirstOrDefault();
             if (iscorrect)
              {
-                User.Id = sql.ShowId(User.Name).Select(x=>x.Id).FirstOrDefault();
+                Locator.Data.Id= sql.ShowId(User.Name).Select(x=>x.Id).FirstOrDefault();
                 NavigateHome.Execute(this);
             }
             else MessageBox.Show("Некорекный логин или пароль");

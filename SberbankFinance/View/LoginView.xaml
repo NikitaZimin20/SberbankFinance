@@ -8,7 +8,9 @@
              mc:Ignorable="d"              
              Height="600" 
              Width="400">
+   
     <Grid>
+        
         <StackPanel Background="#151719">
             <StackPanel Height="50"                        
                         Background="#212121">
@@ -45,11 +47,12 @@
             
             Width="300"
             FontSize="20"
+                        
             materialdesign:HintAssist.Hint="Пароль" 
             materialdesign:HintAssist.Background="Transparent"
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
-            Password="{Binding Path=User.Password}" 
+            Password="{Binding Path=User.Password,Mode=TwoWay, ValidatesOnDataErrors=True}" 
             
                 >
                 </components:BindablePasswordBox>
