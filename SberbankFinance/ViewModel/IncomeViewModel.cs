@@ -9,10 +9,10 @@ using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
-    internal class IncomeViewModel: BaseViewModel
+    internal class IncomeViewModel:ChartView
     {
         
-        public IncomeViewModel( )
+        public IncomeViewModel():base(States.BalanceState.Income)
         {
           
         }

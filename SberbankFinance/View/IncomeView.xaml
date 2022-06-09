@@ -3,10 +3,133 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SberbankFinance.View"
+             xmlns:local="clr-namespace:SberbankFinance.View" xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:livecharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-            
+            Height="600" 
+             Width="400">
+    <Grid Background="#151719">
+
+        <StackPanel>
+            <StackPanel.Resources>
+                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            </StackPanel.Resources>
+            <StackPanel
+           
+            Margin="20 20"
+            Height="55"
+            Width="325"
+            Background="#212121"
+                >
+                <TextBlock 
+                HorizontalAlignment="Left"
+                Text="{Binding Path=MonthAmount}"
+                Foreground="White"
+                    FontSize="25"
+                    FontFamily="Bahnschrift SemiLight Condensed"
+               
+                />
+                <StackPanel 
+                    Orientation="Horizontal"
+                    Margin="0 0 0 0">
+                    <TextBlock
+                 FontSize="15"
+                HorizontalAlignment="Left"
+                Text="Доходы за "
+                
+                Foreground="White" FontFamily="Bahnschrift SemiLight Condensed"
+                />
+                    <TextBlock 
+                        FontSize="15"
+                        Text="{Binding Path=MonthLable}"
+                        Foreground="White"
+                       FontFamily="Bahnschrift SemiLight Condensed"/>
+                </StackPanel>
+
+
+            </StackPanel>
+            <DatePicker
+                Background="Transparent"
+                BorderThickness="0"
+                Height="30"
+                HorizontalAlignment="Right"
+                materialdesign:HintAssist.Hint="Дата"
+                Foreground="White"
+                Text="Выберите дату"
+                Margin="0 0 15 0" Width="55" 
+                
+                >
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="IsReadOnly" Value="True"/>
+                        <Setter Property="Foreground" Value="Transparent"/>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
+            <Grid Height="250">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="71*"/>
+                    <ColumnDefinition Width="8*"/>
+
+                </Grid.ColumnDefinitions>
+                <Button
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Grid.Column="0"
+                    Height="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,50,0,0" Width="14"
+                    Command="{Binding Path=MonthCommand}"
+                    CommandParameter="-1"
+                    >
+                    <materialdesign:PackIcon
+                        Kind="ArrowLeft"
+                        
+                        Height="80"
+                        Width="44"
+                        Margin="-25 0 0 0"
+                        
+                        />
+                </Button>
+                <livecharts:PieChart LegendLocation="Bottom"
+                                 Series="{Binding Path=SeriesCol}"
+                                 Foreground="White"
+                                 Grid.Column="1"
+                                 />
+                <Button
+                    Background="Transparent"
+                    BorderThickness="0"
+                     Height="100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,50,0,0" Width="14"
+                    Grid.Column="3"
+                    
+                    Visibility="{Binding Path=IsArrowEnable,Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding Path=MonthCommand}"
+                    CommandParameter="1"
+                    >
+
+
+                    <materialdesign:PackIcon
+                        Kind="ArrowRight"
+                        
+                        Height="80"
+                        Width="44"
+                        Margin="-36 0 0 0"
+                        />
+                </Button>
+            </Grid>
+
+
+
+
+
+        </StackPanel>
+
+
     </Grid>
 </UserControl>

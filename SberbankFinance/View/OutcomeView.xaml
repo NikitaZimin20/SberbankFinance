@@ -37,7 +37,7 @@
                     <TextBlock
                  FontSize="15"
                 HorizontalAlignment="Left"
-                Text="Расходы в "
+                Text="Расходы за "
                 
                 Foreground="White" FontFamily="Bahnschrift SemiLight Condensed"
                 />
@@ -85,7 +85,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Margin="0,50,0,0" Width="14"
-                    Command="{Binding Path=MonthReduceCommand}"
+                    Command="{Binding Path=MonthCommand}"
+                    CommandParameter="-1"
                     >
                     <materialdesign:PackIcon
                         Kind="ArrowLeft"
@@ -111,7 +112,8 @@
                     Grid.Column="3"
                     
                     Visibility="{Binding Path=IsArrowEnable,Converter={StaticResource BooleanToVisibilityConverter}}"
-                    
+                    Command="{Binding Path=MonthCommand}"
+                    CommandParameter="1"
                     >
                     
                    

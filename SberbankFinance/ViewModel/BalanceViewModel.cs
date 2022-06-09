@@ -28,9 +28,9 @@ namespace SberbankFinance.ViewModel
             {
                 if (_balanceState==BalanceState.Outcome)
                 {
-                    return _sql.GetOutcomeCategory().Select(x => x.Categories).ToArray();
+                    return _sql.GetCategory(false).Select(x => x.Categories).ToArray();
                 }
-                return _sql.GetIncomeCategory().Select(x => x.Categories).ToArray();
+                return _sql.GetCategory(true).Select(x => x.Categories).ToArray();
             }
 
         

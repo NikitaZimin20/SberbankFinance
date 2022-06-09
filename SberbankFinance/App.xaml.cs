@@ -19,7 +19,7 @@ namespace SberbankFinance
         {
             NavigationStore navigationStore = new NavigationStore();
 
-            navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new BalanceViewModel(navigationStore,States.BalanceState.Income);
 
             MainWindow = new MainWindow()
             {

@@ -35,15 +35,10 @@ namespace SberbankFinance.SqlDataAccess
             _dataAccess.SaveData(sql, new { username, password }, _connectionString);
 
         }
-        public List<SqlDataModel> GetOutcomeCategory()
+        public List<SqlDataModel> GetCategory(bool category)
         {
-            string sql = "SELECT CategoryName AS Categories FROM OutcomeCategories";
-            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new {  }, _connectionString);
-        }
-        public List<SqlDataModel> GetIncomeCategory()
-        {
-            string sql = "Select CategoryName AS Categories FROM IncomeCategories";
-            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { }, _connectionString);
+            string sql = "SELECT CategoryName AS Categories FROM Categories WHERE Type=@category";
+            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { category }, _connectionString);
         }
         
         public void AddOutcome(BalanceModel balance,int id)
@@ -52,18 +47,18 @@ namespace SberbankFinance.SqlDataAccess
             
             _dataAccess.SaveData(sql, new { balance.Amount, balance.Date,balance.Type,id }, _connectionString);
         }
-        public List<SqlDataModel> GetOutcomeByMonth(int id,DateTime selectedDate )
+        public List<SqlDataModel> GetBalanceByMonth(int id,DateTime selectedDate,bool type )
         {
             DateTime startDate = new DateTime(selectedDate.Year,selectedDate.Month,1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
-            string sql = "SELECT sum(Outcome.Amount) AS Amount,OutcomeCategories.CategoryName AS Categories " +
+            string sql = "SELECT sum(Outcome.Amount) AS Amount,Categories.CategoryName AS Categories " +
                 "From Outcome  " +
-                "JOIN  OutcomeCategories On OutcomeCategories.Id=Outcome.Category_Id " +
-                "WHERE Outcome.User_id=@id and Date BETWEEN @startDate AND @endDate " +
-                "GROUP BY OutcomeCategories.CategoryName";
+                "JOIN  Categories On Categories.Id=Outcome.Category_Id " +
+                "WHERE Outcome.User_id=@id and Date BETWEEN @startDate AND @endDate AND Categories.Type=@type " +
+                "GROUP BY Categories.CategoryName";
 ;
 
-            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new {id,startDate,endDate }, _connectionString);
+            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new {id,startDate,endDate,type }, _connectionString);
         }
 
     }
