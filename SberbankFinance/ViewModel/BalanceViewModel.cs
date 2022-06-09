@@ -15,7 +15,7 @@ namespace SberbankFinance.ViewModel
 {
     internal class BalanceViewModel:BaseViewModel
     {
-    
+        
         public BalanceModel BalanceModel { get; }
         SqlCrud _sql;
         public ICommand NavigateToHomeView { get; }
@@ -28,14 +28,12 @@ namespace SberbankFinance.ViewModel
             {
                 if (_balanceState==BalanceState.Outcome)
                 {
-                    return _sql.GetCategory(false).Select(x => x.Categories).ToArray();
+                    return _sql.GetCategory(false).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
                 }
-                return _sql.GetCategory(true).Select(x => x.Categories).ToArray();
+                return _sql.GetCategory(true).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
             }
-
-        
         }
-       
+      
         public string Label
         {
             get
@@ -57,9 +55,10 @@ namespace SberbankFinance.ViewModel
 
         public BalanceViewModel(NavigationStore navigationStore,BalanceState state)
         {
-
+            
             _sql= new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            BalanceModel = new BalanceModel();
+            
+            BalanceModel = new BalanceModel(navigationStore,state);
             _balanceState=state;
             NavigateToHomeView= new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             NoteCommand = new RelayCommand(OnExecuteNoteCommand,CanExecuteNoteCommand);

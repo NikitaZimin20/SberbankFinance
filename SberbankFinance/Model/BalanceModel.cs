@@ -1,15 +1,21 @@
-﻿using SberbankFinance.States;
+﻿using SberbankFinance.Commands;
+using SberbankFinance.States;
+using SberbankFinance.Stores;
+using SberbankFinance.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SberbankFinance.Model
 {
     internal class BalanceModel:INotifyPropertyChanged
     {
+        private ICommand NavigateNewCategory { get; }
+        private readonly BalanceState _state;
         private string _amount;
         private string _type;
         private DateTime _data=DateTime.Now;
@@ -28,7 +34,10 @@ namespace SberbankFinance.Model
             get => _type;
             set
             {
-                
+                if (value== "Добавить новую категорию")
+                {
+                    NavigateNewCategory.Execute(this);
+                }
                 _type = value;
                 OnPropertyChanged(nameof(Type));
             }
@@ -41,6 +50,13 @@ namespace SberbankFinance.Model
                 _data = value;
                 OnPropertyChanged(nameof(Date));
             }
+        }
+        public BalanceModel(NavigationStore store,BalanceState state)
+        {
+           
+            _state = state;
+            NavigateNewCategory = new NavigateCommand<NewCategoryViewModel>(store, () => new NewCategoryViewModel(store, _state));
+           
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
