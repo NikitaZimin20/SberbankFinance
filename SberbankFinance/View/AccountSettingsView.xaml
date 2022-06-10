@@ -6,11 +6,13 @@
              xmlns:local="clr-namespace:SberbankFinance.View"
              xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" 
              xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             d:DataContext="{d:DesignInstance Type=viewmodel:AccountSettingsViewModel}"
              xmlns:viewmodels="clr-namespace:SberbankFinance.ViewModel"
              xmlns:views="clr-namespace:SberbankFinance.View"
+             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400">
+             
+             d:DesignHeight="450" 
+             d:DesignWidth="400">
     <Border Background="#151719">
         <Grid>
             <Grid.RowDefinitions>
