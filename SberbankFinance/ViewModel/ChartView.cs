@@ -4,6 +4,7 @@ using LiveCharts.Wpf;
 using SberbankFinance.Commands;
 using SberbankFinance.SqlDataAccess;
 using SberbankFinance.States;
+using SberbankFinance.Stores;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,13 +26,13 @@ namespace SberbankFinance.ViewModel
         private void OnExecuteMonthCommand(object obj)
         {
             SelectedMonth = _selectedMonth.AddMonths(Convert.ToInt32(obj));
-            InsertChart();
+            ShowChart();
         }
+        public ICommand NavigateToListView { get; }
         public bool IsArrowEnable
         {
             get
             {
-
                 if (SelectedMonth.Month == DateTime.Now.Month)
                 {
                     return false;
@@ -74,7 +75,7 @@ namespace SberbankFinance.ViewModel
             }
         }
 
-        private void InsertChart()
+        private void ShowChart()
         {
             double sum = 0d;
             SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
@@ -90,13 +91,14 @@ namespace SberbankFinance.ViewModel
             OnPropertyChanged(nameof(IsArrowEnable));
 
         }
-        public ChartView(BalanceState balance)
+
+        public ChartView(NavigationStore navigationStore,BalanceState balance)
         {
-            if (balance == BalanceState.Income)
-                _state = true;
+            NavigateToListView = new NavigateCommand<ListViewModel>(navigationStore, () => new ListViewModel(navigationStore, BalanceState.Outcome,SelectedMonth));
+            _state = Locator.Data.State.GetValueOrDefault(balance);
             MonthCommand = new RelayCommand(OnExecuteMonthCommand, CanExecuteMonthCommand);
             SeriesCol = new SeriesCollection();
-            InsertChart();
+            ShowChart();
         }
     }
 }

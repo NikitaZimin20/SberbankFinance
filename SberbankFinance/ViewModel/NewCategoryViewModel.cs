@@ -15,7 +15,7 @@ namespace SberbankFinance.ViewModel
     internal class NewCategoryViewModel:BaseViewModel
     {
         private readonly bool _state=false;
-        public string InputText { get; set; }
+        public string InputText { get;  set; }
         public ICommand BackCommand { get; }
         ICommand NavigateToBalance { get; }
 

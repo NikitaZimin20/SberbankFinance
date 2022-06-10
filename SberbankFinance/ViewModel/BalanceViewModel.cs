@@ -15,7 +15,6 @@ namespace SberbankFinance.ViewModel
 {
     internal class BalanceViewModel:BaseViewModel
     {
-        
         public BalanceModel BalanceModel { get; }
         SqlCrud _sql;
         public ICommand NavigateToHomeView { get; }
@@ -57,7 +56,7 @@ namespace SberbankFinance.ViewModel
         {
             
             _sql= new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            
+           
             BalanceModel = new BalanceModel(navigationStore,state);
             _balanceState=state;
             NavigateToHomeView= new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));

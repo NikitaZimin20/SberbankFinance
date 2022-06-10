@@ -36,8 +36,8 @@ namespace SberbankFinance.ViewModel
             NavigateToSettingsCommand= new NavigateCommand<SettingsViewModel>(navigationStore, () => new SettingsViewModel(navigationStore));
             NavigateToOutcomeCommand = new NavigateCommand<BalanceViewModel>(navigationStore, () => new BalanceViewModel(navigationStore,BalanceState.Outcome));
             NavigateToIncomeCommand = new NavigateCommand<BalanceViewModel>(navigationStore, () => new BalanceViewModel(navigationStore,BalanceState.Income));
-            SelectedViewModel = new OutcomeViewModel();
-            UpdateViewCommand = new ShowViewCommand(this);
+            SelectedViewModel = new OutcomeViewModel(navigationStore);
+            UpdateViewCommand = new ShowViewCommand(this, navigationStore);
             
          
         }

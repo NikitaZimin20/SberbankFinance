@@ -4,6 +4,7 @@ using LiveCharts.Wpf;
 using SberbankFinance.Commands;
 using SberbankFinance.Model;
 using SberbankFinance.SqlDataAccess;
+using SberbankFinance.States;
 using SberbankFinance.Stores;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,11 @@ namespace SberbankFinance.ViewModel
 {
     internal class OutcomeViewModel : ChartView
     {
-       
-        public OutcomeViewModel():base(States.BalanceState.Outcome)
+
+        
+        public OutcomeViewModel(NavigationStore navigationStore):base(navigationStore, BalanceState.Outcome)
         {
-            
+           
         }
       
     }

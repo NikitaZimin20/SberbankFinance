@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SberbankFinance.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,8 @@ namespace SberbankFinance
         public static DataContainer Data { get; set; }
             = new DataContainer()
             {
-                Id=4
+                Id=4,State=new Dictionary<BalanceState, bool>() { { BalanceState.Income,true },{ BalanceState.Outcome,false} }
             };
+
     }
 }

@@ -17,13 +17,14 @@
                 <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             </StackPanel.Resources>
             <StackPanel
-           
+            
             Margin="20 20"
             Height="55"
             Width="325"
             Background="#212121"
                 >
-                <TextBlock 
+                
+                    <TextBlock 
                 HorizontalAlignment="Left"
                 Text="{Binding Path=MonthAmount}"
                 Foreground="White"
@@ -31,6 +32,26 @@
                     FontFamily="Bahnschrift SemiLight Condensed"
                
                 />
+                    <Button
+                        
+                       HorizontalAlignment="Right"
+                        Margin="0 -30 0 0"
+                        Background="Transparent"
+                         Foreground="White"
+                        BorderThickness="0"
+                        Width="40"
+                        Command="{Binding Path=NavigateToListView}">
+                        <materialdesign:PackIcon
+                            Kind="Pageview"
+                            Height="30"
+                            Width="30"
+                            Margin="-10 0"
+                            Foreground="Black"/>
+                    </Button>
+                <Separator/>
+
+
+
                 <StackPanel 
                     Orientation="Horizontal"
                     Margin="0 0 0 0">
@@ -47,7 +68,7 @@
                         Foreground="White"
                        FontFamily="Bahnschrift SemiLight Condensed"/>
                 </StackPanel>
-
+            
 
             </StackPanel>
             <DatePicker
@@ -58,8 +79,7 @@
                 materialdesign:HintAssist.Hint="Дата"
                 Foreground="White"
                 Text="Выберите дату"
-                Margin="0 0 15 0" Width="55" 
-                
+                Margin="0 0 15 0" Width="55"            
                 >
                 <DatePicker.Resources>
                     <Style TargetType="DatePickerTextBox">

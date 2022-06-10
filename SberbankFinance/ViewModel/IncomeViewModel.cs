@@ -12,7 +12,7 @@ namespace SberbankFinance.ViewModel
     internal class IncomeViewModel:ChartView
     {
         
-        public IncomeViewModel():base(States.BalanceState.Income)
+        public IncomeViewModel(NavigationStore navigationStore) :base(navigationStore,States.BalanceState.Income)
         {
           
         }

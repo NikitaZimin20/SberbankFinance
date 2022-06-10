@@ -6,37 +6,42 @@
              xmlns:local="clr-namespace:SberbankFinance.View"
              xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:NewCategoryViewModel}"
              mc:Ignorable="d" 
-             Height="100"
-             Width="250">
+             Height="180"
+             Width="280">
     <Grid Background="#151719">
+        <TextBlock
+            Text="Добавление новой категории"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            Margin="0 5"/>
         <TextBox
             Foreground="White"
             materialdesign:HintAssist.Hint="Введите название категории"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="0 0 0 40"
+            Margin="0 0 0 50"
             Text="{Binding Path=InputText}"/>
         <Button
-            Height="20"
-            Width="60"
+            Height="30"
+            Width="80"
             VerticalAlignment="Bottom"
             BorderBrush="Transparent"
             Content="Принять"
             Foreground="White"
-            FontSize="5" 
-            Margin="0 0 80 10"
+            FontSize="10" 
+            Margin="0 0 110 35"
             Command="{Binding Path=BackCommand}"
             CommandParameter="true"/>
 
         <Button
-            Height="20"
-            Width="60"
+            Height="30"
+            Width="80"
             VerticalAlignment="Bottom"
             BorderBrush="Transparent"
             Content="Отменить"
             Foreground="White"
-            FontSize="5" 
-            Margin="100 0 0 10"
+            FontSize="10" 
+            Margin="110 0 0 35"
             Command="{Binding Path=BackCommand}" 
             CommandParameter="false"/>
     </Grid>

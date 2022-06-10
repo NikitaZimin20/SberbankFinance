@@ -1,4 +1,5 @@
-﻿using SberbankFinance.Stores;
+﻿using SberbankFinance.States;
+using SberbankFinance.Stores;
 using SberbankFinance.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,13 @@ namespace SberbankFinance
         protected override void OnStartup(StartupEventArgs e)
         {
             NavigationStore navigationStore = new NavigationStore();
+            ModalNavigationStore modalNavigationStore = new ModalNavigationStore();
 
-            navigationStore.CurrentViewModel = new BalanceViewModel(navigationStore,States.BalanceState.Income);
+            navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(navigationStore),
+                DataContext = new MainViewModel(navigationStore,modalNavigationStore),
             };
             MainWindow.Show();
             base.OnStartup(e);
