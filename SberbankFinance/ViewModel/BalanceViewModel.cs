@@ -15,27 +15,24 @@ namespace SberbankFinance.ViewModel
 {
     internal class BalanceViewModel:BaseViewModel
     {
-        private readonly UserModel _usermodel;
         public BalanceModel BalanceModel { get; }
         SqlCrud _sql;
         public ICommand NavigateToHomeView { get; }
         public ICommand NoteCommand { get; }
         private readonly BalanceState _balanceState;
-        private string _newcategory ;
+     
         public string[] Categories
         {
             get
             {
                 if (_balanceState==BalanceState.Outcome)
                 {
-                    return _sql.GetOutcomeCategory().Select(x => x.Categories).ToArray();
+                    return _sql.GetCategory(false).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
                 }
-                return _sql.GetIncomeCategory().Select(x => x.Categories).ToArray();
+                return _sql.GetCategory(true).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
             }
-
-        
         }
-       
+      
         public string Label
         {
             get
@@ -49,7 +46,7 @@ namespace SberbankFinance.ViewModel
         }
         private void OnExecuteNoteCommand(object p)
         {
-            _sql.AddOutcome(BalanceModel,_usermodel);
+            _sql.AddOutcome(BalanceModel,Locator.Data.Id);
             NavigateToHomeView.Execute(this);
         }
         private bool CanExecuteNoteCommand(object obj) => true;
@@ -57,9 +54,10 @@ namespace SberbankFinance.ViewModel
 
         public BalanceViewModel(NavigationStore navigationStore,BalanceState state)
         {
-
+            
             _sql= new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            BalanceModel = new BalanceModel();
+           
+            BalanceModel = new BalanceModel(navigationStore,state);
             _balanceState=state;
             NavigateToHomeView= new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             NoteCommand = new RelayCommand(OnExecuteNoteCommand,CanExecuteNoteCommand);

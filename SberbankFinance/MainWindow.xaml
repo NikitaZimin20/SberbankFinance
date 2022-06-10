@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:SberbankFinance"
         mc:Ignorable="d"
         xmlns:views="clr-namespace:SberbankFinance.View"
-        xmlns:viewmodels="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        xmlns:viewmodels="clr-namespace:SberbankFinance.ViewModel" 
+        xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         SizeToContent="WidthAndHeight" 
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
+    <Grid>
+        <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView/>
             </DataTemplate>
@@ -22,20 +24,17 @@
             <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
                 <views:RegisterView/>
             </DataTemplate>
-      
+
             <DataTemplate DataType="{x:Type viewmodels:BalanceViewModel}">
                 <views:BalanceView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:AccountSettingsViewModel}">
-                <views:AccountSettingsView/>
-            </DataTemplate>
             
 
-        </ContentControl.Resources>
-       
-        
-    </ContentControl>
+
+
+    </Grid>
+    
 </Window>

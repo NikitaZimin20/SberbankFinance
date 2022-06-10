@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SberbankFinance.View.NewCategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SberbankFinance.View"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:NewCategoryViewModel}"
+             mc:Ignorable="d" 
+             Height="180"
+             Width="280">
+    <Grid Background="#151719">
+        <TextBlock
+            Text="Добавление новой категории"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            Margin="0 5"/>
+        <TextBox
+            Foreground="White"
+            materialdesign:HintAssist.Hint="Введите название категории"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="0 0 0 50"
+            Text="{Binding Path=InputText}"/>
+        <Button
+            Height="30"
+            Width="80"
+            VerticalAlignment="Bottom"
+            BorderBrush="Transparent"
+            Content="Принять"
+            Foreground="White"
+            FontSize="10" 
+            Margin="0 0 110 35"
+            Command="{Binding Path=BackCommand}"
+            CommandParameter="true"/>
+
+        <Button
+            Height="30"
+            Width="80"
+            VerticalAlignment="Bottom"
+            BorderBrush="Transparent"
+            Content="Отменить"
+            Foreground="White"
+            FontSize="10" 
+            Margin="110 0 0 35"
+            Command="{Binding Path=BackCommand}" 
+            CommandParameter="false"/>
+    </Grid>
+</UserControl>

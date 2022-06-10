@@ -1,18 +1,24 @@
-﻿using SberbankFinance.States;
+﻿using SberbankFinance.Commands;
+using SberbankFinance.States;
+using SberbankFinance.Stores;
+using SberbankFinance.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SberbankFinance.Model
 {
     internal class BalanceModel:INotifyPropertyChanged
     {
+        private ICommand NavigateNewCategory { get; }
+        private readonly BalanceState _state;
         private string _amount;
-        private string _description;
-        private DateTime _calendar=DateTime.Now;
+        private string _type;
+        private DateTime _data=DateTime.Now;
 
         public string Amount
         {
@@ -23,24 +29,34 @@ namespace SberbankFinance.Model
                 OnPropertyChanged(nameof(Amount));
             }
         }
-        public string Description
+        public string Type
         {
-            get => _description;
+            get => _type;
             set
             {
-                
-                _description = value;
-                OnPropertyChanged(nameof(Description));
+                if (value== "Добавить новую категорию")
+                {
+                    NavigateNewCategory.Execute(this);
+                }
+                _type = value;
+                OnPropertyChanged(nameof(Type));
             }
         }
-        public DateTime Calendar
+        public DateTime Date
         {
-            get => _calendar;
+            get => _data;
             set
             {
-                _calendar = value;
-                OnPropertyChanged(nameof(Calendar));
+                _data = value;
+                OnPropertyChanged(nameof(Date));
             }
+        }
+        public BalanceModel(NavigationStore store,BalanceState state)
+        {
+           
+            _state = state;
+            NavigateNewCategory = new NavigateCommand<NewCategoryViewModel>(store, () => new NewCategoryViewModel(store, _state));
+           
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,4 +1,5 @@
-﻿using SberbankFinance.ViewModel;
+﻿using SberbankFinance.Stores;
+using SberbankFinance.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace SberbankFinance.Commands
 {
     internal class ShowViewCommand : ICommand
     {
+        private readonly NavigationStore _navigationStore;  
         private HomeViewModel viewModel;
-        public ShowViewCommand(HomeViewModel viewModel)
+        public ShowViewCommand(HomeViewModel viewModel, NavigationStore navigationStore)
         {
+            _navigationStore= navigationStore;
             this.viewModel = viewModel;
         }
 
@@ -27,11 +30,11 @@ namespace SberbankFinance.Commands
         {
             if (parameter.ToString() == "Income")
             {
-                viewModel.SelectedViewModel = new IncomeViewModel();
+                viewModel.SelectedViewModel = new IncomeViewModel(_navigationStore);
             }
             else if (parameter.ToString() == "Outcome")
             {
-                viewModel.SelectedViewModel = new OutcomeViewModel();
+                viewModel.SelectedViewModel = new OutcomeViewModel(_navigationStore);
             }
         }
     }
