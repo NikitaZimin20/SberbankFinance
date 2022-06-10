@@ -37,9 +37,11 @@
             <DataTemplate DataType="{x:Type viewmodels:ListViewModel}">
                 <views:ListView/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type viewmodels:AccountSettingsViewModel}">
+                <views:AccountSettingsView/>
+            </DataTemplate>
         </Grid.Resources>
-        <modalcontrol:Modal Panel.ZIndex="-1" IsOpen="{Binding IsModalOpen}">
+        <modalcontrol:Modal Panel.ZIndex="-1" IsOpen="{Binding Path=IsModalOpen}">
             <ContentControl Content="{Binding CurrentModalViewModel}"/>
         </modalcontrol:Modal>
         <ContentControl Content="{Binding CurrentViewModel}"/>

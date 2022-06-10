@@ -83,7 +83,7 @@ namespace SberbankFinance.ViewModel
             var sqlData = sql.GetBalanceByMonth(Locator.Data.Id, _selectedMonth,_state);
             foreach (var item in sqlData)
             {
-                temp.Add(new PieSeries { Title = item.Categories, Values = new ChartValues<ObservableValue> { new ObservableValue(double.Parse(item.Amount)) } });
+                temp.Add(new PieSeries { Title = item.Type, Values = new ChartValues<ObservableValue> { new ObservableValue(double.Parse(item.Amount)) } });
                 sum += double.Parse(item.Amount);
             }
             MonthAmount = sum.ToString();

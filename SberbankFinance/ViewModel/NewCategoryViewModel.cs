@@ -30,12 +30,12 @@ namespace SberbankFinance.ViewModel
         }
         private bool CanExecuteBackCommand(object obj) => true;
 
-        public NewCategoryViewModel(ModalNavigationStore navigationStore,BalanceState state)
+        public NewCategoryViewModel(NavigationStore navigationStore , BalanceState state)
         {
-            NavigationStore navigation = new NavigationStore();
+            
             _state = Locator.Data.State.GetValueOrDefault(state);
             BackCommand = new RelayCommand(OnExecuteBackCommand,CanExecuteBackCommand);
-            NavigateToBalance = new NavigateCommand<BalanceViewModel>(navigation, () => new BalanceViewModel(navigation, state));
+            NavigateToBalance = new NavigateCommand<BalanceViewModel>(navigationStore, () => new BalanceViewModel(navigationStore, state));
 
         }
     }

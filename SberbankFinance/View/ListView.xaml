@@ -61,6 +61,7 @@
                 Width="775"
                 Foreground="White"  
                 materialDesign:HintAssist.Hint="Введите тип операции,сумму или дату"
+                Text="{Binding Path=Pattern,UpdateSourceTrigger=PropertyChanged}"
                
                />
 
@@ -71,7 +72,9 @@
                       MaxHeight="325"
                       Width="801"
                       ItemsSource="{Binding Path=Balance}"
+                      SelectedItem="{Binding Path=SelectedItem}"
                       Opacity="1"
+                      SelectionChanged="OnSelectionChanged"
                       HorizontalAlignment="Stretch" 
                       SelectionMode="Single"
                       

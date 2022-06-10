@@ -29,7 +29,6 @@
                 Foreground="White"
                 Margin="100 10"
                 FontSize="18"
-                
                 />
             <Button
                 Background="Transparent"
@@ -39,7 +38,6 @@
                 <materialdesign:PackIcon 
                     Kind="Settings"
                     Foreground="Lime"
-                    
                     Height="25"
                     Width="30"
                     HorizontalAlignment="Center"
@@ -66,8 +64,8 @@
                 BorderThickness="0"
                 Background="Transparent"
                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                 Command="{Binding Path=UpdateViewCommand}"
-                 CommandParameter="Income"/>
+                Command="{Binding Path=UpdateViewCommand}"
+                CommandParameter="Income"/>
         </StackPanel>
 
         <ContentControl Content="{Binding SelectedViewModel}"
@@ -131,10 +129,5 @@
             </StackPanel>
 
         </Button>
-        
-
-
-
-
     </StackPanel>
 </UserControl>
