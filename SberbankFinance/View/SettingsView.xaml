@@ -54,10 +54,12 @@
             <Button 
                 Background="Transparent"
                 BorderThickness="0"
+                Command="{Binding Path=GoAccountSettingsCommand}"
                 Content="Изменить логин или пароль аккаунта"
                 Foreground="White"
                 Margin="0 0 0 10"
-                FontSize="16"/>
+                FontSize="16"
+                />
             <Button
                  Background="Transparent"
                 BorderThickness="0"
