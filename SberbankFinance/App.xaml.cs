@@ -22,6 +22,7 @@ namespace SberbankFinance
             ModalNavigationStore modalNavigationStore = new ModalNavigationStore();
 
             navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
+            modalNavigationStore.CurrentViewModel = new NewCategoryViewModel(modalNavigationStore,BalanceState.Income);
 
             MainWindow = new MainWindow()
             {

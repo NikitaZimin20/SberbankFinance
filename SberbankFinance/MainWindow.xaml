@@ -39,7 +39,7 @@
             </DataTemplate>
 
         </Grid.Resources>
-        <modalcontrol:Modal Panel.ZIndex="-1" IsOpen="True">
+        <modalcontrol:Modal Panel.ZIndex="-1" IsOpen="{Binding IsModalOpen}">
             <ContentControl Content="{Binding CurrentModalViewModel}"/>
         </modalcontrol:Modal>
         <ContentControl Content="{Binding CurrentViewModel}"/>

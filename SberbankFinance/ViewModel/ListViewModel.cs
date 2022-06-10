@@ -20,13 +20,14 @@ namespace SberbankFinance.ViewModel
         public ObservableCollection<BalanceModel> Balance { get; set; }
         public ListViewModel(NavigationStore navigation,BalanceState state,DateTime currentmonth)
         {
+            ModalNavigationStore modal = new ModalNavigationStore();
             NavigateHome = new NavigateCommand<HomeViewModel>(navigation, () => new HomeViewModel(navigation));
             _sql= new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
             Balance = new ObservableCollection<BalanceModel>();
             var sqlData = _sql.GetBalanceByDays(Locator.Data.Id,currentmonth,Locator.Data.State.GetValueOrDefault(state));
             foreach (var item in sqlData)
             {
-                Balance.Add(new BalanceModel(navigation,state) { Amount = item.Amount, Type = item.Categories, Date = Convert.ToDateTime(item.Date) });
+                Balance.Add(new BalanceModel(modal,state) { Amount = item.Amount, Type = item.Categories, Date = Convert.ToDateTime(item.Date) });
             }
             
         }

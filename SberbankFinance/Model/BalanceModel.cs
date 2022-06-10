@@ -51,11 +51,11 @@ namespace SberbankFinance.Model
                 OnPropertyChanged(nameof(Date));
             }
         }
-        public BalanceModel(NavigationStore store,BalanceState state)
+        public BalanceModel(ModalNavigationStore store,BalanceState state)
         {
            
             _state = state;
-            NavigateNewCategory = new NavigateCommand<NewCategoryViewModel>(store, () => new NewCategoryViewModel(store, _state));
+            NavigateNewCategory = new NavigateModalCommand<NewCategoryViewModel>(store, () => new NewCategoryViewModel(store, _state));
            
         }
 

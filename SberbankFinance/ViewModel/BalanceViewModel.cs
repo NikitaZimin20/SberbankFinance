@@ -54,10 +54,10 @@ namespace SberbankFinance.ViewModel
 
         public BalanceViewModel(NavigationStore navigationStore,BalanceState state)
         {
-            
+            ModalNavigationStore modal = new ModalNavigationStore();
             _sql= new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
            
-            BalanceModel = new BalanceModel(navigationStore,state);
+            BalanceModel = new BalanceModel(modal,state);
             _balanceState=state;
             NavigateToHomeView= new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             NoteCommand = new RelayCommand(OnExecuteNoteCommand,CanExecuteNoteCommand);
