@@ -12,8 +12,8 @@ namespace SberbankFinance.Commands
     internal class ShowViewCommand : ICommand
     {
         private readonly NavigationStore _navigationStore;  
-        private HomeViewModel viewModel;
-        public ShowViewCommand(HomeViewModel viewModel, NavigationStore navigationStore)
+        private BaseViewModel viewModel;
+        public ShowViewCommand(BaseViewModel viewModel, NavigationStore navigationStore)
         {
             _navigationStore= navigationStore;
             this.viewModel = viewModel;
@@ -35,6 +35,14 @@ namespace SberbankFinance.Commands
             else if (parameter.ToString() == "Outcome")
             {
                 viewModel.SelectedViewModel = new OutcomeViewModel(_navigationStore);
+            }
+            else if (parameter.ToString() == "PasswordChange")
+            {
+                viewModel.SelectedViewModel = new PasswordChangeViewModel(_navigationStore);
+            }
+            else if (parameter.ToString() == "LoginChange")
+            {
+                viewModel.SelectedViewModel = new LoginChangeViewModel(_navigationStore);
             }
         }
     }

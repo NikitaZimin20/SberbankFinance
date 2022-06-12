@@ -7,8 +7,7 @@
              xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" 
              xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:viewmodels="clr-namespace:SberbankFinance.ViewModel"
-             xmlns:views="clr-namespace:SberbankFinance.View"
-             
+             xmlns:views="clr-namespace:SberbankFinance.View" d:DataContext="{d:DesignInstance Type=viewmodel:AccountSettingsViewModel}"
              mc:Ignorable="d" 
              
              d:DesignHeight="450" 
@@ -59,18 +58,32 @@
                         Background="#212121"
                         BorderThickness="0"
                         Width="200"
-                        Foreground="White"/>
+                        Foreground="White"
+                        Command="{Binding Path=UpdateViewCommand}"
+                        CommandParameter="LoginChange"/>
 
                 <Button Content="Сменить пароль"
                         Background="#212121"
                         BorderThickness="0"
                         Width="200"
-                        Foreground="White"/>
+                        Foreground="White"
+                        Command="{Binding Path=UpdateViewCommand}"
+                        CommandParameter="PasswordChange"/>
 
             </StackPanel>
 
             <ContentControl Grid.Row="2"
-                            Margin="10"/>
+                            Margin="10"
+                            Content="{Binding SelectedViewModel }">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodels:PasswordChangeViewModel}">
+                        <views:PasswordChangeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:LoginChangeViewModel}">
+                        <views:LoginChangeView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
 
         </Grid>
     </Border>
