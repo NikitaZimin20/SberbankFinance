@@ -45,7 +45,17 @@ namespace SberbankFinance.SqlDataAccess
             string sql = "INSERT INTO Categories(CategoryName,Type) Values(@name,@type)";
             _dataAccess.SaveData(sql, new { name, type }, _connectionString);
         }
-        
+        public void UpdatePassword(string password, int id)
+        {
+            string sql = "UPDATE UserInformation SET password = @password WHERE id = @id";
+            _dataAccess.SaveData(sql, new { password, id }, _connectionString);
+        }
+        public void UpdateLogin(string name, int id)
+        {
+            string sql = "UPDATE UserInformation SET username = @name WHERE id = @id";
+            _dataAccess.SaveData(sql, new { name, id }, _connectionString);
+        }
+
         public void AddOutcome(BalanceModel balance,int id)
         {
             string sql = "INSERT INTO Outcome(Amount,Date,Category_id,User_id) Values(@amount,@date,(Select Id from Categories WHERE CategoryName=@type),@id)";

@@ -12,8 +12,8 @@ namespace SberbankFinance.Commands
     internal class ShowViewCommand : ICommand
     {
         private readonly NavigationStore _navigationStore;  
-        private BaseViewModel viewModel;
-        public ShowViewCommand(BaseViewModel viewModel, NavigationStore navigationStore)
+        private VariableViewModel viewModel;
+        public ShowViewCommand(VariableViewModel viewModel, NavigationStore navigationStore)
         {
             _navigationStore= navigationStore;
             this.viewModel = viewModel;
