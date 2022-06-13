@@ -62,29 +62,29 @@ namespace SberbankFinance.SqlDataAccess
             
             _dataAccess.SaveData(sql, new { balance.Amount, balance.Date,balance.Type,id }, _connectionString);
         }
-        public List<SqlDataModel> GetBalanceByMonth(int id,DateTime selectedDate,bool type )
+        public List<BalanceModel> GetBalanceByMonth(int id,DateTime selectedDate,bool type )
         {
             DateTime startDate = new DateTime(selectedDate.Year,selectedDate.Month,1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
-            string sql = "SELECT sum(Outcome.Amount) AS Amount,Categories.CategoryName AS Categories " +
+            string sql = "SELECT sum(Outcome.Amount) AS Amount,Categories.CategoryName AS Type " +
                 "From Outcome  " +
                 "JOIN  Categories On Categories.Id=Outcome.Category_Id " +
                 "WHERE Outcome.User_id=@id and Date BETWEEN @startDate AND @endDate AND Categories.Type=@type " +
                 "GROUP BY Categories.CategoryName";
 
-            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new {id,startDate,endDate,type }, _connectionString);
+            return _dataAccess.LoadData<BalanceModel, dynamic>(sql, new {id,startDate,endDate,type }, _connectionString);
         }
-        public List<SqlDataModel> GetBalanceByDays(int id, DateTime selectedDate, bool type)
+        public List<BalanceModel> GetBalanceByDays(int id, DateTime selectedDate, bool type)
         {
             DateTime startDate = new DateTime(selectedDate.Year, selectedDate.Month, 1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
-            string sql = "SELECT Outcome.Amount AS Amount,Categories.CategoryName AS Categories,Outcome.Date " +
+            string sql = "SELECT Outcome.Amount AS Amount,Categories.CategoryName AS Type,Outcome.Date " +
                 "From Outcome  " +
                 "JOIN  Categories On Categories.Id=Outcome.Category_Id " +
                 "WHERE Outcome.User_id=@id and Date BETWEEN @startDate AND @endDate AND Categories.Type=@type  Order by Outcome.Date";
                 
 
-            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { id, startDate, endDate, type }, _connectionString);
+            return _dataAccess.LoadData<BalanceModel, dynamic>(sql, new { id, startDate, endDate, type }, _connectionString);
         }
 
     }

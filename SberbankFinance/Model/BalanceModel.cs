@@ -14,8 +14,7 @@ namespace SberbankFinance.Model
 {
     internal class BalanceModel:INotifyPropertyChanged
     {
-        private ICommand NavigateNewCategory { get; }
-        private readonly BalanceState _state;
+      
         private string _amount;
         private string _type;
         private DateTime _data=DateTime.Now;
@@ -34,14 +33,12 @@ namespace SberbankFinance.Model
             get => _type;
             set
             {
-                if (value== "Добавить новую категорию")
-                {
-                    NavigateNewCategory.Execute(this);
-                }
+                
                 _type = value;
                 OnPropertyChanged(nameof(Type));
             }
         }
+
         public DateTime Date
         {
             get => _data;
@@ -51,12 +48,13 @@ namespace SberbankFinance.Model
                 OnPropertyChanged(nameof(Date));
             }
         }
-        public BalanceModel(NavigationStore store,BalanceState state)
+        public bool StartWith(string pattern)
         {
-           
-            _state = state;
-            NavigateNewCategory = new NavigateCommand<NewCategoryViewModel>(store, () => new NewCategoryViewModel(store, _state));
-           
+            
+            if (Amount.StartsWith(pattern)) return true;
+            else if (Type.StartsWith(pattern)) return true;
+            else if (Date.ToString().StartsWith(pattern)) return true;
+            return false;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

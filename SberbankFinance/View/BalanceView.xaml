@@ -65,7 +65,8 @@
             Height="30"
             materialdesign:HintAssist.Hint="Категория"
             Text="{Binding Path=BalanceModel.Type}"
-            ItemsSource="{Binding Categories}">
+            ItemsSource="{Binding Categories}"
+            SelectedItem="{Binding SelectedItem}">
             
         </ComboBox>
         <DatePicker

@@ -35,19 +35,7 @@ Title="MainWindow" Height="450" Width="800">
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:NewCategoryViewModel}">
-                <views:NewCategoryView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ListViewModel}">
-                <views:ListView/>
-            </DataTemplate>
-
-        </Grid.Resources>
-        <modalcontrol:Modal Panel.ZIndex="-1" IsOpen="{Binding IsModalOpen}">
-            <ContentControl Content="{Binding CurrentModalViewModel}"/>
-        </modalcontrol:Modal>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
-
+            
 
 
 
