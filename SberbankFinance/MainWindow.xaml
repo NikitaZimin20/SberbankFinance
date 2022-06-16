@@ -35,9 +35,21 @@ Title="MainWindow" Height="450" Width="800">
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
             </DataTemplate>
-            
+            <DataTemplate DataType="{x:Type viewmodels:ListViewModel}">
+                <views:ListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:NewCategoryViewModel}">
+                <views:NewCategoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ChangeColorViewModel}">
+                <views:ChangeColorView/>
+            </DataTemplate>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
 
-
+        <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding Path=IsModalOpen}">
+            <ContentControl Content="{Binding CurrentModalViewModel}" />
+        </modalcontrol:Modal>
 
     </Grid>
 

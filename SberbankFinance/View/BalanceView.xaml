@@ -64,7 +64,7 @@
             Foreground="White"
             Height="30"
             materialdesign:HintAssist.Hint="Категория"
-            Text="{Binding Path=BalanceModel.Type}"
+            Text="{Binding Path=BalanceModel.Category}"
             ItemsSource="{Binding Categories}"
             SelectedItem="{Binding SelectedItem}">
             

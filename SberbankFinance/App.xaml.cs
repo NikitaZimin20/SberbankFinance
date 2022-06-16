@@ -11,9 +11,6 @@ using System.Windows;
 
 namespace SberbankFinance
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
@@ -22,7 +19,7 @@ namespace SberbankFinance
             ModalNavigationStore modalNavigationStore = new ModalNavigationStore();
 
             navigationStore.CurrentViewModel = new HomeViewModel(navigationStore);
-            modalNavigationStore.CurrentViewModel = new NewCategoryViewModel(navigationStore, BalanceState.Income);
+         
 
             MainWindow = new MainWindow()
             {

@@ -1,13 +1,5 @@
 ﻿using SberbankFinance.Commands;
-using SberbankFinance.Model;
-using SberbankFinance.SqlDataAccess;
-using SberbankFinance.States;
 using SberbankFinance.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
@@ -15,7 +7,6 @@ namespace SberbankFinance.ViewModel
     internal class AccountSettingsViewModel : BaseViewModel
     {
         public ICommand GoSettingsCommand { get; }
-        private BaseViewModel _selectedViewModel;
         public ICommand NavigateToPasswordChangeCommand { get; }
         public ICommand NavigateToLoginChangeCommand { get; }
         public ICommand UpdateViewCommand { get; set; }
@@ -25,7 +16,7 @@ namespace SberbankFinance.ViewModel
             GoSettingsCommand = new NavigateCommand<SettingsViewModel>(navigationStore, () => new SettingsViewModel(navigationStore));
             NavigateToPasswordChangeCommand = new NavigateCommand<PasswordChangeViewModel>(navigationStore, () => new PasswordChangeViewModel(navigationStore));
             NavigateToLoginChangeCommand = new NavigateCommand<LoginChangeViewModel>(navigationStore, () => new LoginChangeViewModel(navigationStore));
-            UpdateViewCommand = new ShowViewCommand(this, navigationStore);
+            //UpdateViewCommand = new ShowViewCommand(this,navigationStore);
             SelectedViewModel = new LoginChangeViewModel(navigationStore);
         }
     }
