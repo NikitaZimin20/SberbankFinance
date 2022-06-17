@@ -29,4 +29,8 @@
     <Resource Include="SberbankFinancer.db" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Photos\" />
+  </ItemGroup>
+
 </Project>

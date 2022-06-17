@@ -12,15 +12,29 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
-    internal class LoginChangeViewModel :BaseViewModel
+    internal class LoginChangeViewModel : BaseViewModel
     {
+        public ICommand ChangeLoginCommand { get; }
+        public string Login { get; set; }
+
         public LoginChangeViewModel(NavigationStore navigationStore)
         {
-
+            ChangeLoginCommand = new RelayCommand(OnExecuteChangeLoginCommand, CanExecuteChangeLoginCommand);
         }
+
+        private void OnExecuteChangeLoginCommand(object p)
+        {
+            SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
+            sql.UpdateLogin(Login, Locator.Data.Id);
+            MessageBox.Show("Вы успешно сменили логин",
+                "Attention", MessageBoxButton.OK);
+        }
+
+        private bool CanExecuteChangeLoginCommand(object p) => true;
     }
 }
