@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
-    internal class HomeViewModel:BaseViewModel
+    internal class HomeViewModel:VariableViewModel
     {
         public UserModel user { get; }
         public ICommand NavigateToIncomeCommand { get; }

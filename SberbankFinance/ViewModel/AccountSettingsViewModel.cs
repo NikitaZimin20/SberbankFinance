@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
-    internal class AccountSettingsViewModel : BaseViewModel
+    internal class AccountSettingsViewModel : VariableViewModel
     {
         public ICommand GoSettingsCommand { get; }
         public ICommand NavigateToPasswordChangeCommand { get; }
