@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SberbankFinance.View"
              xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:components="clr-namespace:SberbankFinance.Components"
+             xmlns:components="clr-namespace:SberbankFinance.Components" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LoginChangeViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
     <StackPanel>
@@ -19,6 +19,7 @@
                                         Cursor="IBeam"
                                         Opacity="0.5"
                                         Margin="15"
+                                        Text="{Binding Path=Login, Mode=TwoWay, ValidatesOnDataErrors=True}"
                                         />
             
             <Button VerticalAlignment="Center"
@@ -26,7 +27,8 @@
                         Margin="15"
                         Height="50"
                         Content="Сохранить изменения"
-                        FontSize="20">
+                        FontSize="20"
+                        Command="{Binding Path=ChangeLoginCommand}">
             </Button>
 
         </StackPanel>

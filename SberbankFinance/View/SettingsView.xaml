@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SberbankFinance.View" xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
+             xmlns:local="clr-namespace:SberbankFinance.View" 
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400"
-               >
+             d:DesignHeight="450" d:DesignWidth="400">
+    
     <StackPanel Background="#151719">
         <StackPanel 
             VerticalAlignment="Top"
@@ -38,19 +41,42 @@
 
         </StackPanel>
         <StackPanel >
-           
-            <materialdesign:PackIcon
-                Kind="Account"
-                Height="140"
-                Width="100"
-                HorizontalAlignment="Center"/>
+            <Grid>
+                <Button 
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding Path=SetImageCommand}"
+                    Foreground="White"
+                    Height="140"
+                    Width="100"
+                    FontSize="16">
+                    <materialdesign:PackIcon
+                        Kind="Account"
+                        Height="140"
+                        Width="100"
+                        HorizontalAlignment="Center"
+                    />
+                </Button>
+                <Button 
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding Path=SetImageCommand}"
+                    Height="140"
+                    Width="100"
+                    Visibility="{Binding Path=HaveImage,Converter={StaticResource BooleanToVisibilityConverter}}"
+                    FontSize="16">
+                    <Image
+                        Source="{Binding Path=ImageSource, Mode =TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Stretch="UniformToFill"/>
+                </Button>
+            </Grid>
         </StackPanel>
         <StackPanel 
             Orientation="Vertical"
             VerticalAlignment="Top"
             
             >
-            
+
             <Button 
                 Background="Transparent"
                 BorderThickness="0"

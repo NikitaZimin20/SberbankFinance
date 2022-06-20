@@ -50,10 +50,10 @@ namespace SberbankFinance.SqlDataAccess
             string sql = "UPDATE UserInformation SET password = @password WHERE id = @id";
             _dataAccess.SaveData(sql, new { password, id }, _connectionString);
         }
-        public void UpdateLogin(string name, int id)
+        public void UpdateLogin(string username, int id)
         {
-            string sql = "UPDATE UserInformation SET username = @name WHERE id = @id";
-            _dataAccess.SaveData(sql, new { name, id }, _connectionString);
+            string sql = "UPDATE UserInformation SET username = @username WHERE id = @id";
+            _dataAccess.SaveData(sql, new { username, id }, _connectionString);
         }
 
         public void AddOutcome(BalanceModel balance,int id)
