@@ -25,8 +25,9 @@ namespace SberbankFinance.ViewModel
 
         private void OnCurrentModalViewModelChanged()
         {
-            OnPropertyChanged(nameof(CurrentModalViewModel));
             OnPropertyChanged(nameof(IsModalOpen));
+            OnPropertyChanged(nameof(CurrentModalViewModel));
+            
         }
 
         private void OnCurrentViewModelChanged()

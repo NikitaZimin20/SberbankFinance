@@ -63,7 +63,7 @@
             materialdesign:HintAssist.Hint="Пароль"
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 50"
-                    Password="{Binding Path=User.Password}" Loaded="BindablePasswordBox_Loaded"
+                    Password="{Binding Path=User.Password}" 
                 >
                     </components:BindablePasswordBox>
                     <TextBox 

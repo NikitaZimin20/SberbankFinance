@@ -39,7 +39,7 @@
             </Button>
 
             <TextBlock
-            Text="{Binding }"
+            Text="{Binding Label }"
             
             VerticalAlignment="Center"
             
@@ -71,8 +71,8 @@
                       MinHeight="100"
                       MaxHeight="325"
                       Width="801"
-                      ItemsSource="{Binding Path=Balance}"
-                      SelectedItem="{Binding Path=SelectedItem}"
+                      ItemsSource="{Binding Path=Balance,UpdateSourceTrigger=PropertyChanged}"
+                     
                       Opacity="1"
                       SelectionChanged="OnSelectionChanged"
                       HorizontalAlignment="Stretch" 
@@ -81,9 +81,9 @@
                   >
                 <ListView.View >
                     <GridView  >
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="Описание" Width="280"></GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Описание" Width="280"></GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Сумма" Width="280"></GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Дата" Width="200"></GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=StringDate}" Header="Дата" Width="200"></GridViewColumn>
 
 
                     </GridView>

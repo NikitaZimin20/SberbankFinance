@@ -44,19 +44,17 @@ namespace SberbankFinance.ViewModel
         private void AcceptRegistration()
         {
             SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            bool iscorrect = sql.CheckExistance(User.Name, User.Password).Select(x => x.IsCorrect).FirstOrDefault();
-            if (iscorrect)
+            bool isduplicate = sql.CheckExistance(User.Name, User.Password).Select(x => x.IsCorrect).FirstOrDefault();
+            if (!isduplicate)
             {
-                MessageBox.Show("Данный пользователь уже существует");
-            }
-            else
-            {                
                 sql.Register(User.Name, User.Password);
                 MessageBox.Show("Вы успешно зарегистрировались",
                "Attention", MessageBoxButton.OK);
                 GoLoginCommand.Execute(this);
-            }
-            
+                return;
+            }    
+            MessageBox.Show("Данный пользователь уже существует");
+
         }
         public bool CanExecuteRegisterCommand(object p) => true;
         public RegisterViewModel(NavigationStore navigationStore)

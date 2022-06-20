@@ -12,7 +12,12 @@ namespace SberbankFinance
         public static DataContainer Data { get; set; }
             = new DataContainer()
             {
-                Id=4,State=new Dictionary<BalanceState, bool>() { { BalanceState.Income,true },{ BalanceState.Outcome,false} }
+                Id=4,
+                State=new Dictionary<BalanceState, bool>() { { BalanceState.Income,true },{ BalanceState.Outcome,false} },
+                UsersColors=new Dictionary<int, Dictionary<string, System.Windows.Media.Brushes>>()
+                {
+
+                }
             };
 
     }

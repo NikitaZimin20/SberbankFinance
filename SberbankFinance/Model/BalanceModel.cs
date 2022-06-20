@@ -16,8 +16,9 @@ namespace SberbankFinance.Model
     {
       
         private string _amount;
-        private string _type;
-        private DateTime _data=DateTime.Now;
+        private string _category;
+        private DateTime _data;
+        private string _stribgdate;
 
         public string Amount
         {
@@ -28,14 +29,14 @@ namespace SberbankFinance.Model
                 OnPropertyChanged(nameof(Amount));
             }
         }
-        public string Type
+        public string Category
         {
-            get => _type;
+            get => _category;
             set
             {
                 
-                _type = value;
-                OnPropertyChanged(nameof(Type));
+                _category = value;
+                OnPropertyChanged(nameof(Category));
             }
         }
 
@@ -48,14 +49,16 @@ namespace SberbankFinance.Model
                 OnPropertyChanged(nameof(Date));
             }
         }
-        public bool StartWith(string pattern)
+        public  string StringDate
         {
-            
-            if (Amount.StartsWith(pattern)) return true;
-            else if (Type.StartsWith(pattern)) return true;
-            else if (Date.ToString().StartsWith(pattern)) return true;
-            return false;
+            get => _stribgdate;
+            set
+            {
+                _stribgdate = value;
+                OnPropertyChanged(nameof(StringDate));
+            }
         }
+        public bool Type { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName = null)

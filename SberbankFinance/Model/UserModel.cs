@@ -8,20 +8,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SberbankFinance.Validation;
 
 namespace SberbankFinance.Model
 {
-    internal class UserModel:INotifyPropertyChanged, INotifyDataErrorInfo
+    internal class UserModel:INotifyPropertyChanged,INotifyDataErrorInfo
     {
         private int _id;
         private string _name;
         private string _password;
         private string _acceptedpassword;
+        string _exeption = string.Empty;
         private readonly ErrorViewModel _errorsViewModel;
-        public  event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-        public bool HasErrors => _errorsViewModel.HasErrors;
-
-        private readonly Dictionary<Fields, ErrorsModel> _errorlist;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public int Id
         {
             get => _id;
@@ -35,7 +34,9 @@ namespace SberbankFinance.Model
             set
             {
                 _name = value;
-                ShowErrors(_name,nameof(Name),Fields.Name);
+              
+                Name.Rules().MinCharacters(2).MaxCharacters(50).IncorectSymbols().Validate(Fields.Name, ref _exeption);
+                ShowErrors(_exeption,nameof(Name));
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -45,7 +46,8 @@ namespace SberbankFinance.Model
             set
             {
                 _password = value;
-                ShowErrors(_password, nameof(Password), Fields.Password);
+                Password.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password,ref _exeption);
+                ShowErrors(_exeption, nameof(Password));
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -55,49 +57,32 @@ namespace SberbankFinance.Model
             set
             {
                 _acceptedpassword = value;
-                ShowErrors(_acceptedpassword, nameof(AcceptedPassword), Fields.AcceptedPassword);
+                AcceptedPassword.Rules().IsAccceptPassword(Password).Validate(Fields.AcceptedPassword, ref _exeption);
+                ShowErrors(_exeption, nameof(Password));
                 OnPropertyChanged(nameof(AcceptedPassword));
             }
         }
-
-        private void ShowErrors(string property, string propetyName, Fields type)
-        {
-            _errorsViewModel.ClearErrors(propetyName);
-            if (property.Length < 2 && type==Fields.Name)
-
-                _errorsViewModel.AddError(propetyName, _errorlist[type].MoreSymbols);
-            else if (property.Length > 50 && type==Fields.Name)
-            {
-                _errorsViewModel.AddError(propetyName, _errorlist[type].LessSymbols);
-            }
-
-            else if (property.Length < 6 &&type==Fields.Password)
-
-                _errorsViewModel.AddError(propetyName, _errorlist[type].IncorrectPassword);
-
-            else if (property.Any(ch => !Char.IsLetterOrDigit(ch))&&type==Fields.Name)
-
-                _errorsViewModel.AddError(propetyName, _errorlist[type].IncorrectSymbols);
-        }
-
+        public bool HasErrors => _errorsViewModel.HasErrors;
         public IEnumerable GetErrors(string? propertyName)
         {
             return _errorsViewModel.GetErrors(propertyName);
         }
-        public UserModel()
-        {
-            _errorsViewModel = new ErrorViewModel();
-            _errorlist = new Dictionary<Fields, ErrorsModel>() { {Fields.Name, new ErrorsModel { MoreSymbols = JsonWorker.GetDescription("MoreSymbols"), LessSymbols = JsonWorker.GetDescription("LessSymbols"), IncorrectSymbols = JsonWorker.GetDescription("Incorrect Symbols") } },
-                { Fields.Password,new ErrorsModel {IncorrectPassword=JsonWorker.GetDescription("IncorrectPassword")  } },
-                {Fields.AcceptedPassword,new ErrorsModel { MoreSymbols = JsonWorker.GetDescription("MoreSymbols"), LessSymbols = JsonWorker.GetDescription("LessSymbols"), IncorrectSymbols = JsonWorker.GetDescription("Incorrect Symbols") } } };
-            _errorsViewModel.ErrorsChanged += Changed;
-        }
-
-     
-
         private void Changed(object? sender, DataErrorsChangedEventArgs e)
         {
             ErrorsChanged?.Invoke(this, e);
+        }
+        private void ShowErrors(string exeption,string propertyName)
+        {
+            
+            _errorsViewModel.ClearErrors(propertyName);
+            _errorsViewModel.AddError(propertyName, exeption);
+
+        }
+
+        public UserModel()
+        {
+            _errorsViewModel = new ErrorViewModel();
+            _errorsViewModel.ErrorsChanged += Changed;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

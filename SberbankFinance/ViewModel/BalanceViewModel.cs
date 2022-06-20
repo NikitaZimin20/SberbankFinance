@@ -29,9 +29,9 @@ namespace SberbankFinance.ViewModel
             {
                 if (_balanceState==BalanceState.Outcome)
                 {
-                    return _sql.GetCategory(false).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
+                    return _sql.GetCategory().Where(x=>x.Type==false).Select(x=>x.Category).Append("Добавить новую категорию").ToArray();
                 }
-                return _sql.GetCategory(true).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
+                return _sql.GetCategory().Where(x => x.Type == true).Select(x => x.Category).Append("Добавить новую категорию").ToArray();
             }
           
         }
@@ -42,7 +42,7 @@ namespace SberbankFinance.ViewModel
             {
                 if (value== "Добавить новую категорию")
                 {
-                    NavigateToNewCategory.Execute(this);
+                   NavigateToNewCategory.Execute(this);
                 }
                 _selecteditem = value;
                 OnPropertyChanged(nameof(SelectedItem));
@@ -70,7 +70,7 @@ namespace SberbankFinance.ViewModel
 
         public BalanceViewModel(NavigationStore navigationStore,BalanceState state)
         {
-            ModalNavigationStore modal = new ModalNavigationStore();
+            
             NavigateToNewCategory = new NavigateCommand<NewCategoryViewModel>(navigationStore,()=>new NewCategoryViewModel(navigationStore,state));
             _sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
             BalanceModel = new BalanceModel();

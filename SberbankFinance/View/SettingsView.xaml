@@ -93,21 +93,15 @@
                 Foreground="White"
                  Margin="0 0 0 10"
                  FontSize="16"/>
+           
             <Button
                  Background="Transparent"
                 BorderThickness="0"
-                Content="Добавить новую категорию"
+                Content="Изменить цвет отображаемой категорий"
                 Foreground="White"
                  Margin="0 0 0 10"
                  FontSize="16"
-                />
-            <Button
-                 Background="Transparent"
-                BorderThickness="0"
-                Content="Изменить цвета отображаемых категорий"
-                Foreground="White"
-                 Margin="0 0 0 10"
-                 FontSize="16"
+                Command="{Binding Path=NavigateColor}"
                 />
             <Button
                  Background="Transparent"
@@ -116,6 +110,7 @@
                 Foreground="White"
                  Margin="0 0 0 10"
                  FontSize="16"
+                
                 />
             <Button
                  Background="Transparent"
@@ -123,6 +118,7 @@
                 Content="Удалить аккаунт"
                 Foreground="White"
                  FontSize="16"
+                Command="{Binding Path=DeleteAccount}"
                 />
         </StackPanel>
     </StackPanel>
