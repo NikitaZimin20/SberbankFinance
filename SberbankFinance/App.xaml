@@ -11,6 +11,20 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Green.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Green.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="errorTemplate">
+                <Border BorderBrush="OrangeRed" BorderThickness="2">
+                    <Grid>
+                        <AdornedElementPlaceholder/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
+                               VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                               Margin="0,0,0,-35" Width="300" TextWrapping="Wrap"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
         </ResourceDictionary>
+
+
+        
+
     </Application.Resources>
 </Application>

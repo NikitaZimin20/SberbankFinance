@@ -44,7 +44,7 @@
                 </TextBox>
                 <Grid>
                     <components:BindablePasswordBox 
-            
+            Tag="{Binding Path=User.Password,ValidatesOnNotifyDataErrors=True,Mode=OneWay}"
             Width="300"
             FontSize="20"
                         
@@ -52,7 +52,9 @@
             materialdesign:HintAssist.Background="Transparent"
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
-            Password="{Binding Path=User.Password,Mode=TwoWay, ValidatesOnDataErrors=True}" 
+            Password="{Binding Path=User.Password}" 
+            Validation.ErrorTemplate="{StaticResource errorTemplate}"
+            
             
                 >
                 </components:BindablePasswordBox>
@@ -66,8 +68,10 @@
             Foreground="White" 
             Cursor="IBeam"
             Text="{Binding Path=User.Password}" 
-            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+            
             Margin="0 50 0 0"
+            
                 >
 
                     </TextBox>

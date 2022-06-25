@@ -24,7 +24,7 @@ namespace SberbankFinance.Components
 
         public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.Register("Password", typeof(string ), typeof(BindablePasswordBox), 
-                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PasswordPropertyChanged, null, false, UpdateSourceTrigger.PropertyChanged));
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PasswordPropertyChanged));
 
         private static void PasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -50,6 +50,7 @@ namespace SberbankFinance.Components
         {
             _isPasswordChanging = true;
             Password = passwordBox.Password;
+            Validation.GetErrors(this);
             _isPasswordChanging = false;
         }
 
