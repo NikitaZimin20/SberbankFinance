@@ -37,7 +37,7 @@
                     Height="30"
                     Width="30"
                     HorizontalAlignment="Center"
-                    />
+                />
             </Button>
             <TextBlock
                 Text="Контроль"
@@ -64,8 +64,9 @@
             Foreground="White"
             Height="30"
             materialdesign:HintAssist.Hint="Категория"
-            Text="{Binding Path=BalanceModel.Type}"
-            ItemsSource="{Binding Categories}">
+            Text="{Binding Path=BalanceModel.Category}"
+            ItemsSource="{Binding Categories}"
+            SelectedItem="{Binding SelectedItem}">
             
         </ComboBox>
         <DatePicker

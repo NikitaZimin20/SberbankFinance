@@ -5,10 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SberbankFinance.View"
              xmlns:livecharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             xmlns:oxy="clr-namespace:OxyPlot;assembly=OxyPlot" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=viewmodel:OutcomeViewModel}"
+             xmlns:oxy="clr-namespace:OxyPlot;assembly=OxyPlot" 
+             xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" 
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:datepicker="clr-namespace:SberbankFinance.CalendarComponents"
+             d:DataContext="{d:DesignInstance Type=viewmodel:OutcomeViewModel}"
              mc:Ignorable="d" 
              Height="600" 
              Width="400"
+             
              >
     <Grid Background="#151719">
 
@@ -72,19 +77,23 @@
 
             </StackPanel>
             <DatePicker
+                datepicker:DatePickerCalendar.IsMonthYear="True"
+                datepicker:DatePickerDateFormat.DateFormat="MM/yyyy"
                 Background="Transparent"
+                
                 BorderThickness="0"
                 Height="30"
                 HorizontalAlignment="Right"
                 materialdesign:HintAssist.Hint="Дата"
                 Foreground="White"
-                Text="Выберите дату"
-                Margin="0 0 15 0" Width="55"            
+                Margin="0 0 15 0" 
+                Width="65"            
                 >
                 <DatePicker.Resources>
                     <Style TargetType="DatePickerTextBox">
                         <Setter Property="IsReadOnly" Value="True"/>
                         <Setter Property="Foreground" Value="Transparent"/>
+                        
                     </Style>
                 </DatePicker.Resources>
             </DatePicker>
@@ -120,8 +129,9 @@
                 <livecharts:PieChart LegendLocation="Bottom"
                                  Series="{Binding Path=SeriesCol}"
                                  Foreground="White"
-                                 Grid.Column="1"
+                                 Grid.Column="1" Grid.ColumnSpan="2" Margin="4,0,33,0"
                                  />
+                
                 <Button
                     Background="Transparent"
                     BorderThickness="0"

@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace SberbankFinance.ViewModel
 {
-    internal class OutcomeViewModel : ChartView
+    internal class OutcomeViewModel : ChartViewModel
     {
 
         

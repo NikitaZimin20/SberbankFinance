@@ -15,8 +15,10 @@ namespace SberbankFinance.ViewModel
 {
     internal class BalanceViewModel:BaseViewModel
     {
+        string _selecteditem;
         public BalanceModel BalanceModel { get; }
         SqlCrud _sql;
+        private ICommand NavigateToNewCategory { get; }
         public ICommand NavigateToHomeView { get; }
         public ICommand NoteCommand { get; }
         private readonly BalanceState _balanceState;
@@ -27,9 +29,23 @@ namespace SberbankFinance.ViewModel
             {
                 if (_balanceState==BalanceState.Outcome)
                 {
-                    return _sql.GetCategory(false).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
+                    return _sql.GetCategory().Where(x=>x.Type==false).Select(x=>x.Category).Append("Добавить новую категорию").ToArray();
                 }
-                return _sql.GetCategory(true).Select(x => x.Categories).Append("Добавить новую категорию").ToArray();
+                return _sql.GetCategory().Where(x => x.Type == true).Select(x => x.Category).Append("Добавить новую категорию").ToArray();
+            }
+          
+        }
+        public string SelectedItem
+        {
+            get => _selecteditem;
+            set
+            {
+                if (value== "Добавить новую категорию")
+                {
+                   NavigateToNewCategory.Execute(this);
+                }
+                _selecteditem = value;
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
       
@@ -55,9 +71,9 @@ namespace SberbankFinance.ViewModel
         public BalanceViewModel(NavigationStore navigationStore,BalanceState state)
         {
             
-            _sql= new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-           
-            BalanceModel = new BalanceModel(navigationStore,state);
+            NavigateToNewCategory = new NavigateCommand<NewCategoryViewModel>(navigationStore,()=>new NewCategoryViewModel(navigationStore,state));
+            _sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
+            BalanceModel = new BalanceModel();
             _balanceState=state;
             NavigateToHomeView= new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             NoteCommand = new RelayCommand(OnExecuteNoteCommand,CanExecuteNoteCommand);

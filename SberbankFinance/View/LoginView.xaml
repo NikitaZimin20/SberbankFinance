@@ -67,9 +67,8 @@
             Style="{StaticResource MaterialDesignFilledTextBox}"
             Foreground="White" 
             Cursor="IBeam"
-            Text="{Binding Path=User.Password}" 
-            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
-            
+            Text="{Binding Path=User.Password}"    
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
             Margin="0 50 0 0"
             
                 >

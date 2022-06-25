@@ -1,17 +1,17 @@
 ﻿<Window x:Class="SberbankFinance.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SberbankFinance"
-        mc:Ignorable="d"
-        xmlns:views="clr-namespace:SberbankFinance.View"
-        xmlns:viewmodels="clr-namespace:SberbankFinance.ViewModel" 
-        xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" 
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
-        SizeToContent="WidthAndHeight" 
-        WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:local="clr-namespace:SberbankFinance"
+mc:Ignorable="d"
+xmlns:views="clr-namespace:SberbankFinance.View"
+xmlns:viewmodels="clr-namespace:SberbankFinance.ViewModel"
+xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+SizeToContent="WidthAndHeight"
+WindowStartupLocation="CenterScreen"
+Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
@@ -25,28 +25,32 @@
                 <views:RegisterView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:AccountSettingsViewModel}">
+                <views:AccountSettingsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:BalanceViewModel}">
                 <views:BalanceView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:NewCategoryViewModel}">
-                <views:NewCategoryView/>
-            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:ListViewModel}">
                 <views:ListView/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type viewmodels:NewCategoryViewModel}">
+                <views:NewCategoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ChangeColorViewModel}">
+                <views:ChangeColorView/>
+            </DataTemplate>
         </Grid.Resources>
-        <modalcontrol:Modal Panel.ZIndex="-1" IsOpen="True">
-            <ContentControl Content="{Binding CurrentModalViewModel}"/>
-        </modalcontrol:Modal>
         <ContentControl Content="{Binding CurrentViewModel}"/>
 
-
-
+        <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding Path=IsModalOpen}">
+            <ContentControl Content="{Binding CurrentModalViewModel}" />
+        </modalcontrol:Modal>
 
     </Grid>
-    
+
 </Window>
