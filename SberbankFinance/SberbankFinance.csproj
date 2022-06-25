@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="View\Resources\4.JPG" />
     <None Remove="SberbankFinancer.db" />
   </ItemGroup>
 
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="View\Resources\4.JPG" />
     <Resource Include="SberbankFinancer.db" />
   </ItemGroup>
 

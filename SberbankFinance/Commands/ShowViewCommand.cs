@@ -9,11 +9,11 @@ using System.Windows.Input;
 
 namespace SberbankFinance.Commands
 {
-    internal class ShowViewCommand : ICommand
+    internal class ShowViewCommand<T> : ICommand where T : VariableViewModel
     {
         private readonly NavigationStore _navigationStore;  
-        private HomeViewModel _viewModel;
-        public ShowViewCommand(HomeViewModel viewModel,NavigationStore navigationStore)
+        private readonly T _viewModel;
+        public ShowViewCommand(T viewModel,NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
             _viewModel = viewModel;
