@@ -64,9 +64,9 @@ namespace SberbankFinance.Validation
             return this;
         }
          
-        public void Validate(Fields validationType,ref string exeption)
+        public void Validate(Fields validationType,out string exeption)
         {
-            
+            exeption = string.Empty;
             if (_success == true)
                 return;
             exeption=_errors.GetValueOrDefault(validationType);
