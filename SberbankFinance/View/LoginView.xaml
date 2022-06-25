@@ -65,8 +65,6 @@
             Password="{Binding Path=User.Password}" 
             Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource OppositeConverter}}"         
             Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.ColumnSpan="2"
-            
-            
                 >
                     </components:BindablePasswordBox>
                     <TextBox 

@@ -58,7 +58,7 @@ namespace SberbankFinance.Model
             {
                 _acceptedpassword = value;
                 AcceptedPassword.Rules().IsAccceptPassword(Password).Validate(Fields.AcceptedPassword, out _exeption);
-                ShowErrors(nameof(Password));
+                ShowErrors(nameof(AcceptedPassword));
                 OnPropertyChanged(nameof(AcceptedPassword));
             }
         }
