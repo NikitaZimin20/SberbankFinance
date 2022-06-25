@@ -11,7 +11,6 @@
           "Dapper": "2.0.123",
           "Extended.Wpf.Toolkit": "4.3.0",
           "LiveCharts.Wpf": "0.9.7",
-          "LoadingSpinnerControl": "1.0.0",
           "MaterialDesignThemes": "4.5.0",
           "Microsoft.Extensions.Configuration": "6.0.1",
           "Microsoft.Extensions.Configuration.FileExtensions": "6.0.0",
@@ -470,11 +469,6 @@
             "fileVersion": "2.0.20525.0"
           }
         }
-      },
-      "LoadingSpinnerControl/1.0.0": {
-        "runtime": {
-          "LoadingSpinnerControl.dll": {}
-        }
       }
     }
   },
@@ -798,11 +792,6 @@
       "sha512": "sha512-0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
       "path": "system.windows.interactivity.wpf/2.0.20525",
       "hashPath": "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
-    },
-    "LoadingSpinnerControl/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

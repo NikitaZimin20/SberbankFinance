@@ -4,12 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SberbankFinance.View"
+             xmlns:cc="clr-namespace:SberbankFinance.Converters"
              xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" xmlns:components="clr-namespace:SberbankFinance.Components" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              mc:Ignorable="d"              
              Height="600" 
              Width="400">
    
     <Grid>
+        <Grid.Resources>
+            <cc:BooleanToVisisbilityConverter x:Key="OppositeConverter"
+                       True="Collapsed" 
+                        False="Visible"/>
+        </Grid.Resources>
         
         <StackPanel Background="#151719">
             <StackPanel Height="50"                        
@@ -36,8 +42,9 @@
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
             Foreground="White" 
-                    Cursor="IBeam"
-                    Text="{Binding Path=User.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"
+            Cursor="IBeam"
+            Text="{Binding Path=User.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"
+            Validation.ErrorTemplate="{StaticResource errorTemplate}"
             Margin="0 50 0 0"
                 >
                     
@@ -53,6 +60,7 @@
             Foreground="White" Cursor="IBeam"
             Margin="0 50 0 0"
             Password="{Binding Path=User.Password}" 
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource OppositeConverter}}"         
             Validation.ErrorTemplate="{StaticResource errorTemplate}"
             
             
@@ -70,6 +78,7 @@
             Text="{Binding Path=User.Password}"    
             Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
             Margin="0 50 0 0"
+            Validation.ErrorTemplate="{StaticResource errorTemplate}"
             
                 >
 
