@@ -35,8 +35,8 @@ namespace SberbankFinance.Model
             {
                 _name = value;
               
-                Name.Rules().MinCharacters(2).MaxCharacters(50).IncorectSymbols().Validate(Fields.Name, ref _exeption);
-                ShowErrors(_exeption,nameof(Name));
+                Name.Rules().MinCharacters(2).MaxCharacters(50).Validate(Fields.Name, out _exeption);
+                ShowErrors(nameof(Name));  
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -46,8 +46,8 @@ namespace SberbankFinance.Model
             set
             {
                 _password = value;
-                Password.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password,ref _exeption);
-                ShowErrors(_exeption, nameof(Password));
+                Password.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password,out _exeption);
+                ShowErrors(nameof(Password));
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -57,8 +57,8 @@ namespace SberbankFinance.Model
             set
             {
                 _acceptedpassword = value;
-                AcceptedPassword.Rules().IsAccceptPassword(Password).Validate(Fields.AcceptedPassword, ref _exeption);
-                ShowErrors(_exeption, nameof(Password));
+                AcceptedPassword.Rules().IsAccceptPassword(Password).Validate(Fields.AcceptedPassword, out _exeption);
+                ShowErrors(nameof(Password));
                 OnPropertyChanged(nameof(AcceptedPassword));
             }
         }
@@ -71,13 +71,19 @@ namespace SberbankFinance.Model
         {
             ErrorsChanged?.Invoke(this, e);
         }
-        private void ShowErrors(string exeption,string propertyName)
+        private void ShowErrors(string propertyName)
         {
-            
-            _errorsViewModel.ClearErrors(propertyName);
-            _errorsViewModel.AddError(propertyName, exeption);
-
+            if (!String.IsNullOrEmpty(_exeption))
+            {
+                _errorsViewModel.ClearErrors(propertyName);
+                _errorsViewModel.AddError(propertyName, _exeption);
+            }
+            else
+            {
+                _errorsViewModel.ClearErrors(propertyName);
+            }         
         }
+            
 
         public UserModel()
         {

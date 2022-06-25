@@ -9,14 +9,14 @@
              mc:Ignorable="d"              
              Height="600" 
              Width="400">
-   
+
     <Grid>
         <Grid.Resources>
             <cc:BooleanToVisisbilityConverter x:Key="OppositeConverter"
                        True="Collapsed" 
                         False="Visible"/>
         </Grid.Resources>
-        
+
         <StackPanel Background="#151719">
             <StackPanel Height="50"                        
                         Background="#212121">
@@ -33,8 +33,8 @@
             <StackPanel Height="540">
                 <StackPanel.Resources>
                     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-                    </StackPanel.Resources>
-                    <TextBox 
+                </StackPanel.Resources>
+                <TextBox 
             Background="#212121"
             Width="300"
             FontSize="20"
@@ -47,25 +47,28 @@
             Validation.ErrorTemplate="{StaticResource errorTemplate}"
             Margin="0 50 0 0"
                 >
-                    
+
                 </TextBox>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="47*"/>
+                    </Grid.ColumnDefinitions>
                     <components:BindablePasswordBox 
-            Tag="{Binding Path=User.Password,ValidatesOnNotifyDataErrors=True,Mode=OneWay}"
+           
             Width="300"
-            FontSize="20"
-                        
+            FontSize="20"           
             materialdesign:HintAssist.Hint="Пароль" 
             materialdesign:HintAssist.Background="Transparent"
             Foreground="White" Cursor="IBeam"
-            Margin="0 50 0 0"
+            Margin="50,50,50,0"
             Password="{Binding Path=User.Password}" 
             Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource OppositeConverter}}"         
-            Validation.ErrorTemplate="{StaticResource errorTemplate}"
+            Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.ColumnSpan="2"
             
             
                 >
-                </components:BindablePasswordBox>
+                    </components:BindablePasswordBox>
                     <TextBox 
             Background="#212121"
             Width="300"
@@ -77,8 +80,8 @@
             Cursor="IBeam"
             Text="{Binding Path=User.Password}"    
             Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
-            Margin="0 50 0 0"
-            Validation.ErrorTemplate="{StaticResource errorTemplate}"
+            Margin="50,50,50,0"
+            Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.ColumnSpan="2"
             
                 >
 
