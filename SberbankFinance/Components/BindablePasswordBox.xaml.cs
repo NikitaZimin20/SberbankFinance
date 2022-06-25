@@ -50,7 +50,6 @@ namespace SberbankFinance.Components
         {
             _isPasswordChanging = true;
             Password = passwordBox.Password;
-            Validation.GetErrors(this);
             _isPasswordChanging = false;
         }
 

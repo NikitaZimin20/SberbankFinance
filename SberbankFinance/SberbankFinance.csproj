@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LoadingSpinnerControl\LoadingSpinnerControl.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="View\Resources\4.JPG" />
     <Resource Include="SberbankFinancer.db" />
   </ItemGroup>
