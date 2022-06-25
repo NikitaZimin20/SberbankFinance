@@ -46,7 +46,6 @@
        
         <StackPanel
             Grid.ColumnSpan="3"
-            Background="#212121"  
             >
             <TextBlock
             
