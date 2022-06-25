@@ -135,7 +135,7 @@
 
                 <Button VerticalAlignment="Center"
                         Margin="50 30 50 0"
-                        Height="50"
+                        Height="51"
                         Content="Зарегистрироваться"
                         FontSize="20"
                         Command="{Binding Path=RegisterCommand}">
