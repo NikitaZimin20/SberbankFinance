@@ -36,6 +36,15 @@ namespace SberbankFinance.Commands
             {
                 _viewModel.SelectedViewModel = new OutcomeViewModel(_navigationStore);
             }
+
+            else if (parameter.ToString() == "LoginChange")
+            {
+                _viewModel.SelectedViewModel = new LoginChangeViewModel(_navigationStore);
+            }
+            else if (parameter.ToString() == "PasswordChange")
+            {
+                _viewModel.SelectedViewModel = new PasswordChangeViewModel(_navigationStore);
+            }    
       
         }
     }

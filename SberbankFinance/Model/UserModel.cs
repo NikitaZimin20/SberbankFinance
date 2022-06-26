@@ -17,6 +17,7 @@ namespace SberbankFinance.Model
         private int _id;
         private string _name;
         private string _password;
+        private string _oldpassword;
         private string _acceptedpassword;
         string _exeption = string.Empty;
         private readonly ErrorViewModel _errorsViewModel;
@@ -38,6 +39,17 @@ namespace SberbankFinance.Model
                 Name.Rules().MinCharacters(2).MaxCharacters(50).Validate(Fields.Name, out _exeption);
                 ShowErrors(nameof(Name));  
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+        public string OldPassword
+        {
+            get => _oldpassword;
+            set
+            {
+                _oldpassword = value;
+                OldPassword.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password, ref _exeption);
+                ShowErrors(_exeption, nameof(OldPassword));
+                OnPropertyChanged(nameof(OldPassword));
             }
         }
         public string Password

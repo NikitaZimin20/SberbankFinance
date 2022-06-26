@@ -39,6 +39,12 @@ namespace SberbankFinance.SqlDataAccess
 
             return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { username,password }, _connectionString);
         }
+        public List<SqlDataModel> CheckPassword(int userId, string password)
+        {
+            string sql = "SELECT Exists(select * from UserInformation where password= @password and id = @userId) as IsCorrect";
+
+            return _dataAccess.LoadData<SqlDataModel, dynamic>(sql, new { userId, password }, _connectionString);
+        }
         public List<SqlDataModel> ShowId(string username)
         {
             string sql = "select id as Id from UserInformation  where username=@username  ";

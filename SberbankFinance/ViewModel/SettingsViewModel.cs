@@ -5,6 +5,7 @@ using SberbankFinance.Stores;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,40 +14,37 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Runtime.CompilerServices;
 
 namespace SberbankFinance.ViewModel
 {
     internal class SettingsViewModel : BaseViewModel
     {
-        
         public ICommand NavigateHome { get; }
         public ICommand GoAccountSettingsCommand { get; }
-
         public ICommand SetImageCommand { get; }
-        private ImageSource _image;
+        ImageSource _ImageSource;
+
         public SettingsViewModel(NavigationStore navigationStore)
         {
+            LoadImage(Path.Combine(Environment.CurrentDirectory, "Images", Locator.Data.Id.ToString() + ".jpg"));
+            SetImageCommand = new RelayCommand(OnExecuteSetImageCommand, CanExecuteSetImageCommand);
             NavigateHome = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             GoAccountSettingsCommand = new NavigateCommand<AccountSettingsViewModel>(navigationStore, () => new AccountSettingsViewModel(navigationStore));
-            SetImageCommand = new RelayCommand(OnExecuteSetImageCommand,CanExecuteSetImageCommand);
-            LoadImage();
-          
         }
 
-
-        public void LoadImage()
+        public void LoadImage(string path)
         {
-            var path = Path.Combine(Environment.CurrentDirectory, "Images", Locator.Data.Id.ToString() + ".jpg");
             if (File.Exists(path))
             {
-                ImageSource = BitmapFromUri(new Uri(path));
+                ImageSource = BitmapFromUri(path);
                 HaveImage = true;
             }
         }
 
         public bool CanExecuteSetImageCommand(object p) => true;
 
-        public async  void OnExecuteSetImageCommand(object p)
+        public void OnExecuteSetImageCommand(object p)
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Filter = "Image Files(*.jpg;)|*.jpg;";
@@ -54,36 +52,35 @@ namespace SberbankFinance.ViewModel
             {
                 var fileNameToSave = Locator.Data.Id.ToString() + Path.GetExtension(fd.FileName);
                 var imagePath = Path.Combine(Environment.CurrentDirectory, "Images", fileNameToSave);
-                 
                 File.Copy(fd.FileName, imagePath, true);
-                LoadImage();
+                LoadImage(fd.InitialDirectory + fd.FileName);
+                GC.Collect();
             }
-                
-            
-        }
-        private async Task Task(string name,string path,bool state=true )
-        {
-
         }
 
         public ImageSource ImageSource
         {
-            get=> _image;
+            get { return _ImageSource; }
             set
-            {   
-                _image = value;
-                OnPropertyChanged();
+            {
+                _ImageSource = value;
+                OnPropertyChanged("ImageSource");
             }
         }
-        public bool HaveImage { get; private set; }
+        public bool HaveImage = false;
 
-        public static ImageSource BitmapFromUri(Uri source)
+        public static ImageSource BitmapFromUri(string filepath)
         {
             var bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = source;
-            bitmap.CreateOptions= BitmapCreateOptions.IgnoreImageCache;
-            bitmap.EndInit();
+            using (var fs = new FileStream(filepath, FileMode.Open))
+            {
+                bitmap.BeginInit();
+                bitmap.StreamSource = fs;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+            }
+
+            bitmap.Freeze();
             return bitmap;
         }
     }

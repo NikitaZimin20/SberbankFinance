@@ -21,12 +21,17 @@ namespace SberbankFinance.ViewModel
     {
         public ICommand ChangePasswordCommand { get; }
 
-        public string Password { get; set; }
-        public string OldPassword { get; set; }
-        public string AcceptedPassword { get; set; }
+        private bool _ischecked = false;
+        public bool IsChecked
+        {
+            get => _ischecked;
+            set => _ischecked = value;
+        }
+        public UserModel User { get; private set; }
 
         public PasswordChangeViewModel(NavigationStore navigationStore)
         {
+            User = new UserModel();
             ChangePasswordCommand = new RelayCommand(OnExecuteChangePasswordCommand, CanExecuteChangePasswordCommand);
         }
 
@@ -35,7 +40,7 @@ namespace SberbankFinance.ViewModel
         private void OnExecuteChangePasswordCommand(object p)
         {
             //DataContainer data = new DataContainer();
-            if (Password == AcceptedPassword && CheckPassword())
+            if (User.Password == User.AcceptedPassword)
             {
                 AcceptChangePassword();
             }
@@ -49,14 +54,15 @@ namespace SberbankFinance.ViewModel
         private void AcceptChangePassword()
         {
             SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            sql.UpdatePassword(Password, Locator.Data.Id);
-            MessageBox.Show("Вы успешно сменили пароль",
-                "Attention", MessageBoxButton.OK);
-        }
-
-        private bool CheckPassword()
-        {
-            return true;
+            bool ispassvalid = sql.CheckPassword(Locator.Data.Id, User.OldPassword).Select(x => x.IsCorrect).FirstOrDefault();
+            if (ispassvalid)
+            {
+                sql.UpdatePassword(User.Password, Locator.Data.Id);
+                MessageBox.Show("Вы успешно сменили пароль",
+                    "Attention", MessageBoxButton.OK);
+                return;
+            }
+            MessageBox.Show("Старый пароль введён неверно");
         }
     }
 }
