@@ -10,7 +10,8 @@ namespace SberbankFinance.Model
     {
         public string LessSymbols { get; set; }
         public string MoreSymbols { get; set; }
-        public string Incorrectsymbols { get; set; }
+        public string IncorrectSymbols { get; set; }
 
+        public string IncorrectPassword { get; set; }
     }
 }

@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="SberbankFinance.View.ListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SberbankFinance.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ListViewModel}"
+             mc:Ignorable="d" 
+            Height="450" Width="800">
+
+    <Grid Background="#151719"  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="66*"/>
+            <ColumnDefinition Width="42*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        
+
+        <StackPanel Grid.ColumnSpan="3" 
+                    Orientation="Horizontal"
+                    
+                    >
+            <Button
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding Path=NavigateHome}"
+                >
+                <materialDesign:PackIcon 
+                    Kind="ArrowBack"
+                    Foreground="Lime"
+                    Height="30"
+                    Width="30"
+                    HorizontalAlignment="Center"
+                    />
+            </Button>
+
+            <TextBlock
+            Text="{Binding Label }"
+            
+            VerticalAlignment="Center"
+            
+            Margin="240 5 0 0"
+            Foreground="White"
+            FontSize="30" 
+            Height="38" 
+            FontFamily="Bahnschrift Condensed"
+            />
+          
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" 
+                 
+                  Grid.ColumnSpan="3" Grid.Row="1" Margin="0,10,0,5" Grid.RowSpan="2">
+            <TextBox
+                Margin="0 0 0 20" 
+                Height="25" 
+                Width="775"
+                Foreground="White"  
+                materialDesign:HintAssist.Hint="Введите тип операции,сумму или дату"
+                Text="{Binding Path=Pattern,UpdateSourceTrigger=PropertyChanged}"
+               
+               />
+
+
+            <ListView x:Name="box" 
+                      
+                      MinHeight="100"
+                      MaxHeight="325"
+                      Width="801"
+                      ItemsSource="{Binding Path=Balance,UpdateSourceTrigger=PropertyChanged}"
+                     
+                      Opacity="1"
+                      SelectionChanged="OnSelectionChanged"
+                      HorizontalAlignment="Stretch" 
+                      SelectionMode="Single"
+                      
+                  >
+                <ListView.View >
+                    <GridView  >
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Описание" Width="280"></GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Сумма" Width="280"></GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=StringDate}" Header="Дата" Width="200"></GridViewColumn>
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

@@ -4,11 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SberbankFinance.View"
-             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterViewModel}"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" xmlns:components="clr-namespace:SberbankFinance.Components" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterViewModel}"
+             xmlns:cc="clr-namespace:SberbankFinance.Converters"
              mc:Ignorable="d"              
              Height="600" 
              Width="400">
     <Grid>
+        <Grid.Resources>
+            <cc:BooleanToVisisbilityConverter x:Key="OppositeConverter"
+                       True="Collapsed" 
+                        False="Visible"/>
+        </Grid.Resources>
         <StackPanel Background="#151719">
             <StackPanel Height="50"                        
                         Background="#212121"
@@ -49,53 +55,96 @@
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
             Foreground="White" Cursor="IBeam"
+             Text="{Binding Path=User.Name}"
+                    Validation.ErrorTemplate="{StaticResource errorTemplate}"
             Margin="0 50 0 0"
                 >
                 </TextBox>
 
-                <TextBox 
+                <Grid>
+
+                    <components:BindablePasswordBox 
+            Background="#212121"
+            Width="300"
+            FontSize="20"
+            materialdesign:HintAssist.Hint="Пароль"
+            Foreground="White" Cursor="IBeam"
+            Margin="0 50 0 50"
+                        Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource OppositeConverter}}"
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                    Password="{Binding Path=User.Password}" 
+                >
+                    </components:BindablePasswordBox>
+                    <TextBox 
             Background="#212121"
             Width="300"
             FontSize="20"
             materialdesign:HintAssist.Hint="Пароль"
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            Foreground="White" Cursor="IBeam"
-            Margin="0 50 0 0"
+            Foreground="White" 
+            Cursor="IBeam"
+            Text="{Binding Path=User.Password}" 
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="0 50 0 50"
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"
                 >
-                </TextBox>
 
-                <TextBox 
+                    </TextBox>
+                </Grid>
+                <Grid>
+                    <components:BindablePasswordBox
+            Background="#212121"
+            Width="300"
+            FontSize="20"
+            materialdesign:HintAssist.Hint="Повторите пароль"
+            Foreground="White" Cursor="IBeam"
+            Margin="0 10 0 30"
+                        Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource OppositeConverter}}"
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"
+            Password="{Binding Path=User.AcceptedPassword}"
+                >
+                    </components:BindablePasswordBox>
+                    <TextBox 
             Background="#212121"
             Width="300"
             FontSize="20"
             materialdesign:HintAssist.Hint="Повторите пароль"
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            Foreground="White" Cursor="IBeam"
-            Margin="0 10 0 0"
+            Foreground="White" 
+            Cursor="IBeam"
+            Text="{Binding Path=User.AcceptedPassword}" 
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="0 10 0 30"
+                        Validation.ErrorTemplate="{StaticResource errorTemplate}"
                 >
-                </TextBox>
 
-                <CheckBox Margin="65 10 65 0" 
+                    </TextBox>
+                </Grid>
+
+                <CheckBox x:Name="CommentCheckBox"
+                          Margin="65 10 65 40" 
                           Content="    Показать пароль"
                           FontSize="20"
                           Foreground="#808080"
-                          materialdesign:CheckBoxAssist.CheckBoxSize="25" >
+                          materialdesign:CheckBoxAssist.CheckBoxSize="25"
+                          IsChecked="{Binding Path=IsChecked}">
 
                 </CheckBox>
 
                 <Button VerticalAlignment="Center"
                         Margin="50 30 50 0"
-                        Height="50"
+                        Height="51"
                         Content="Зарегистрироваться"
-                        FontSize="20">
+                        FontSize="20"
+                        Command="{Binding Path=RegisterCommand}" Cursor="Hand">
 
 
 
                 </Button>
 
             </StackPanel>
-        </StackPanel>   
+        </StackPanel>
     </Grid>
 </UserControl>

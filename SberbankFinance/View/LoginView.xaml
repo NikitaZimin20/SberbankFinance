@@ -4,11 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SberbankFinance.View"
-             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
+             xmlns:cc="clr-namespace:SberbankFinance.Converters"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:SberbankFinance.ViewModel" xmlns:components="clr-namespace:SberbankFinance.Components" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              mc:Ignorable="d"              
              Height="600" 
              Width="400">
+
     <Grid>
+        <Grid.Resources>
+            <cc:BooleanToVisisbilityConverter x:Key="OppositeConverter"
+                       True="Collapsed" 
+                        False="Visible"/>
+        </Grid.Resources>
+
         <StackPanel Background="#151719">
             <StackPanel Height="50"                        
                         Background="#212121">
@@ -22,7 +30,10 @@
                 Margin="0 10 0 0"
                 />
             </StackPanel>
-            <StackPanel Height="235">
+            <StackPanel Height="540">
+                <StackPanel.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                </StackPanel.Resources>
                 <TextBox 
             Background="#212121"
             Width="300"
@@ -30,68 +41,94 @@
             materialdesign:HintAssist.Hint="Логин"
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            Foreground="White" Cursor="IBeam"
+            Foreground="White" 
+            Cursor="IBeam"
+            Text="{Binding Path=User.Name, Mode=TwoWay, ValidatesOnDataErrors=True}"
+            Validation.ErrorTemplate="{StaticResource errorTemplate}"
             Margin="0 50 0 0"
                 >
-                </TextBox>
 
-                <TextBox 
+                </TextBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="47*"/>
+                    </Grid.ColumnDefinitions>
+                    <components:BindablePasswordBox 
+           
+            Width="300"
+            FontSize="20"           
+            materialdesign:HintAssist.Hint="Пароль" 
+            materialdesign:HintAssist.Background="Transparent"
+            Foreground="White" Cursor="IBeam"
+            Margin="50,50,50,0"
+            Password="{Binding Path=User.Password}" 
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource OppositeConverter}}"         
+            Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.ColumnSpan="2"
+            
+            
+                >
+                    </components:BindablePasswordBox>
+                    <TextBox 
             Background="#212121"
             Width="300"
             FontSize="20"
             materialdesign:HintAssist.Hint="Пароль"
             materialdesign:HintAssist.Background="Transparent"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            Foreground="White" Cursor="IBeam"
-            Margin="0 50 0 0"
+            Foreground="White" 
+            Cursor="IBeam"
+            Text="{Binding Path=User.Password}"    
+            Visibility="{Binding ElementName=CommentCheckBox, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"
+            Margin="50,50,50,0"
+            Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.ColumnSpan="2"
+            
                 >
-                </TextBox>
 
-            </StackPanel>
-            <StackPanel Height="60">
-                <CheckBox Margin="65 0 65 0" 
+                    </TextBox>
+                </Grid>
+
+                <CheckBox 
+                         Name="CommentCheckBox"
+                         Margin="65 45 65 0" 
                           Content="    Показать пароль"
                           FontSize="20"
                           Foreground="#808080"
-                          materialdesign:CheckBoxAssist.CheckBoxSize="25" >
-                    
+                          materialdesign:CheckBoxAssist.CheckBoxSize="25" 
+                          IsChecked="{Binding Path=IsChecked}"
+                          >
+
                 </CheckBox>
 
-                <CheckBox Margin="65 0 65 0" 
+                <CheckBox Margin="65 30 65 0" 
                           Content="    Запомнить меня"
                           FontSize="20"
                           Foreground="#808080"
                           materialdesign:CheckBoxAssist.CheckBoxSize="25" >
 
                 </CheckBox>
-                
-            </StackPanel>
-
-            <StackPanel Height="75">
 
                 <Button VerticalAlignment="Center"
-                        Margin="50 10 50 0"
+                        Margin="50 30 50 0"
                         Height="50"
                         Content="Прододжить"
-                        FontSize="20">
-                    
-                    
-                    
-                </Button>
-                
-            </StackPanel>
-            <StackPanel Height="180">
+                        FontSize="20"
+                        Command="{Binding Path=LoginCommand}">
 
-                <Button Margin="50 10 50 0"
+
+
+                </Button>
+
+                <Button Margin="50 30 50 0"
                         Content="Зарегистрироваться"
                         FontSize="18"
                         Background="Transparent"
                         Foreground="#808080"
                         Command="{Binding Path=GoRegisterCommand}">
-                        
+
                 </Button>
-                
             </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>

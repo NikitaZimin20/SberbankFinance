@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SberbankFinance", "SberbankFinance\SberbankFinance.csproj", "{0D73F112-E954-41D9-AA63-AA242C552972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SberbankFinance", "SberbankFinance\SberbankFinance.csproj", "{0D73F112-E954-41D9-AA63-AA242C552972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
