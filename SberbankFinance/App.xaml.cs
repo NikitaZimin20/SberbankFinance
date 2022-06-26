@@ -18,7 +18,7 @@ namespace SberbankFinance
             NavigationStore navigationStore = new NavigationStore();
             ModalNavigationStore modalNavigationStore = new ModalNavigationStore();
 
-            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new SettingsViewModel(navigationStore);
          
 
             MainWindow = new MainWindow()

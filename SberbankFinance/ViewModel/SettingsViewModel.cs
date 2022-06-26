@@ -4,6 +4,8 @@ using SberbankFinance.SqlDataAccess;
 using SberbankFinance.Stores;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -12,6 +14,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Runtime.CompilerServices;
 
 namespace SberbankFinance.ViewModel
 {
@@ -19,19 +22,22 @@ namespace SberbankFinance.ViewModel
     {
         public ICommand NavigateHome { get; }
         public ICommand GoAccountSettingsCommand { get; }
+        public ICommand SetImageCommand { get; }
+        ImageSource _ImageSource;
 
         public SettingsViewModel(NavigationStore navigationStore)
         {
+            LoadImage(Path.Combine(Environment.CurrentDirectory, "Images", Locator.Data.Id.ToString() + ".jpg"));
+            SetImageCommand = new RelayCommand(OnExecuteSetImageCommand, CanExecuteSetImageCommand);
             NavigateHome = new NavigateCommand<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore));
             GoAccountSettingsCommand = new NavigateCommand<AccountSettingsViewModel>(navigationStore, () => new AccountSettingsViewModel(navigationStore));
         }
 
-        public void LoadImage()
+        public void LoadImage(string path)
         {
-            var path = Path.Combine(Environment.CurrentDirectory, "Images", Locator.Data.Id.ToString() + ".jpg");
             if (File.Exists(path))
             {
-                ImageSource = BitmapFromUri(new Uri(path));
+                ImageSource = BitmapFromUri(path);
                 HaveImage = true;
             }
         }
@@ -47,19 +53,34 @@ namespace SberbankFinance.ViewModel
                 var fileNameToSave = Locator.Data.Id.ToString() + Path.GetExtension(fd.FileName);
                 var imagePath = Path.Combine(Environment.CurrentDirectory, "Images", fileNameToSave);
                 File.Copy(fd.FileName, imagePath, true);
-                LoadImage();
+                LoadImage(fd.InitialDirectory + fd.FileName);
+                GC.Collect();
             }
         }
 
-        public ImageSource ImageSource { get; set; }
+        public ImageSource ImageSource
+        {
+            get { return _ImageSource; }
+            set
+            {
+                _ImageSource = value;
+                OnPropertyChanged("ImageSource");
+            }
+        }
+        public bool HaveImage = false;
 
-        public static ImageSource BitmapFromUri(Uri source)
+        public static ImageSource BitmapFromUri(string filepath)
         {
             var bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = source;
-            bitmap.CacheOption = BitmapCacheOption.OnLoad;
-            bitmap.EndInit();
+            using (var fs = new FileStream(filepath, FileMode.Open))
+            {
+                bitmap.BeginInit();
+                bitmap.StreamSource = fs;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+            }
+
+            bitmap.Freeze();
             return bitmap;
         }
     }
