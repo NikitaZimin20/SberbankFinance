@@ -20,17 +20,18 @@ namespace SberbankFinance.ViewModel
     internal class LoginChangeViewModel : BaseViewModel
     {
         public ICommand ChangeLoginCommand { get; }
-        public string Login { get; set; }
+        public UserModel User { get; private set; }
 
         public LoginChangeViewModel(NavigationStore navigationStore)
         {
+            User = new UserModel();
             ChangeLoginCommand = new RelayCommand(OnExecuteChangeLoginCommand, CanExecuteChangeLoginCommand);
         }
 
         private void OnExecuteChangeLoginCommand(object p)
         {
             SqlCrud sql = new SqlCrud(ConfigurationManager.ConnectionStrings["any"].ConnectionString);
-            sql.UpdateLogin(Login, Locator.Data.Id);
+            sql.UpdateLogin(User.Name, Locator.Data.Id);
             MessageBox.Show("Вы успешно сменили логин",
                 "Attention", MessageBoxButton.OK);
         }

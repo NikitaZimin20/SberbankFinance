@@ -10,6 +10,7 @@ namespace SberbankFinance.Services
     {
         Name,
         Password,
-        AcceptedPassword
+        AcceptedPassword,
+        OldPassword
     }
 }

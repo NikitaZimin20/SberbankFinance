@@ -16,7 +16,7 @@ namespace SberbankFinance.ViewModel
             GoSettingsCommand = new NavigateCommand<SettingsViewModel>(navigationStore, () => new SettingsViewModel(navigationStore));
             NavigateToPasswordChangeCommand = new NavigateCommand<PasswordChangeViewModel>(navigationStore, () => new PasswordChangeViewModel(navigationStore));
             NavigateToLoginChangeCommand = new NavigateCommand<LoginChangeViewModel>(navigationStore, () => new LoginChangeViewModel(navigationStore));
-            UpdateViewCommand = new ShowViewCommand(this,navigationStore);
+            UpdateViewCommand = new ShowViewCommand<VariableViewModel>(this,navigationStore);
             SelectedViewModel = new LoginChangeViewModel(navigationStore);
         }
     }

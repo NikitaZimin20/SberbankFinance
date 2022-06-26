@@ -19,7 +19,7 @@ namespace SberbankFinance.Model
         private string _password;
         private string _oldpassword;
         private string _acceptedpassword;
-        string _exeption = string.Empty;
+        string _exception = string.Empty;
         private readonly ErrorViewModel _errorsViewModel;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public int Id
@@ -36,7 +36,7 @@ namespace SberbankFinance.Model
             {
                 _name = value;
               
-                Name.Rules().MinCharacters(2).MaxCharacters(50).Validate(Fields.Name, out _exeption);
+                Name.Rules().MinCharacters(2).MaxCharacters(50).Validate(Fields.Name, out _exception);
                 ShowErrors(nameof(Name));  
                 OnPropertyChanged(nameof(Name));
             }
@@ -47,8 +47,8 @@ namespace SberbankFinance.Model
             set
             {
                 _oldpassword = value;
-                OldPassword.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password, ref _exeption);
-                ShowErrors(_exeption, nameof(OldPassword));
+                OldPassword.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.OldPassword, out _exception);
+                ShowErrors(nameof(OldPassword));
                 OnPropertyChanged(nameof(OldPassword));
             }
         }
@@ -58,7 +58,7 @@ namespace SberbankFinance.Model
             set
             {
                 _password = value;
-                Password.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password,out _exeption);
+                Password.Rules().MinCharacters(5).MaxCharacters(50).Validate(Fields.Password,out _exception);
                 ShowErrors(nameof(Password));
                 OnPropertyChanged(nameof(Password));
             }
@@ -69,7 +69,7 @@ namespace SberbankFinance.Model
             set
             {
                 _acceptedpassword = value;
-                AcceptedPassword.Rules().IsAccceptPassword(Password).Validate(Fields.AcceptedPassword, out _exeption);
+                AcceptedPassword.Rules().IsAccceptPassword(Password).Validate(Fields.AcceptedPassword, out _exception);
                 ShowErrors(nameof(AcceptedPassword));
                 OnPropertyChanged(nameof(AcceptedPassword));
             }
@@ -85,10 +85,10 @@ namespace SberbankFinance.Model
         }
         private void ShowErrors(string propertyName)
         {
-            if (!String.IsNullOrEmpty(_exeption))
+            if (!String.IsNullOrEmpty(_exception))
             {
                 _errorsViewModel.ClearErrors(propertyName);
-                _errorsViewModel.AddError(propertyName, _exeption);
+                _errorsViewModel.AddError(propertyName, _exception);
             }
             else
             {
