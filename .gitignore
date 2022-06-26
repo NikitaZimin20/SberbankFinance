@@ -18,10 +18,26 @@ mono_crash.*
 
 # Build results
 
-
-!bin/
-runtimes
-obj
+/build/
+*.suo
+*.user
+_ReSharper.*/
+*.sdf
+bin/
+obj/
+Debug/
+Release/
+*.opensdf
+*.tlog
+*.log
+SberbankFinancer.db
+ErrorList.json
+*.VisualState.xml
+Version.cs
+Version.h
+Version.cpp
+*/bin/*
+*/obj/*
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
